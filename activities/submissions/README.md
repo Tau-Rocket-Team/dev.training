@@ -1,16 +1,16 @@
-# Submissions
+# Submissões
 
-This directory is where developers submit their completed challenges and tasks.
+Este diretório é onde os desenvolvedores enviam seus desafios e tarefas concluídos.
 
 ---
 
-## Directory Structure
+## Estrutura de Diretórios
 
-Each developer has their own sub-directory named after their GitHub username:
+Cada desenvolvedor tem seu próprio subdiretório nomeado após seu nome de usuário do GitHub:
 
 ```
 submissions/
-├── README.md               ← This file
+├── README.md               ← Este arquivo
 ├── jane-smith/
 │   ├── challenge_01/
 │   │   ├── solution.py
@@ -27,34 +27,34 @@ submissions/
 
 ---
 
-## Submission Instructions
+## Instruções de Submissão
 
-### Step 1: Create Your Directory
+### Passo 1: Crie Seu Diretório
 
-If your `submissions/<your-github-username>/` directory does not exist yet, create it:
+Se o seu diretório `submissions/<seu-github-username>/` ainda não existir, crie-o:
 
 ```bash
 mkdir -p activities/submissions/<your-github-username>
 ```
 
-### Step 2: Add Your Solution
+### Passo 2: Adicione Sua Solução
 
-Place your files in the correct sub-directory as specified by the challenge:
+Coloque seus arquivos no subdiretório correto conforme especificado pelo desafio:
 
 ```bash
-# Example for challenge 01
+# Exemplo para o desafio 01
 mkdir -p activities/submissions/<your-github-username>/challenge_01
-# Add solution.py and test_solution.py
+# Adicione solution.py e test_solution.py
 ```
 
-### Step 3: Run Tests and Lint Locally
+### Passo 3: Execute os Testes e o Lint Localmente
 
-Always verify your work passes before submitting:
+Sempre verifique se seu trabalho passa antes de submeter:
 
 ```bash
 cd activities/submissions/<your-github-username>/challenge_01
 
-# Run tests
+# Executar testes
 pytest test_solution.py -v
 
 # Lint
@@ -62,23 +62,23 @@ ruff check solution.py
 ruff format --check solution.py
 ```
 
-### Step 4: Open a Pull Request
+### Passo 4: Abra um Pull Request
 
-1. Push your branch.
-2. Open a PR against `main` using the [pull request template](../../templates/pull_request_template.md).
-3. Title the PR: `submission: <challenge-name> — <your-github-username>`.
-4. Request your mentor as a reviewer.
+1. Faça push do seu branch.
+2. Abra um PR contra `main` usando o [template de pull request](../../templates/pull_request_template.md).
+3. Nomeie o PR: `submission: <challenge-name> — <your-github-username>`.
+4. Solicite seu mentor como revisor.
 
 ---
 
-## Review Criteria
+## Critérios de Revisão
 
-Mentors will evaluate submissions on:
+Os mentores avaliarão as submissões com base em:
 
-| Criterion | Description |
+| Critério | Descrição |
 |---|---|
-| **Correctness** | Does the solution produce the right output for all cases? |
-| **Tests** | Are edge cases covered? Do all tests pass? |
-| **Code quality** | Is the code readable, well-named, and properly documented? |
-| **Style** | Does it pass linting without warnings? |
-| **Design** | Is the solution well-structured and easy to extend? |
+| **Correção** | A solução produz a saída correta para todos os casos? |
+| **Testes** | Os casos extremos estão cobertos? Todos os testes passam? |
+| **Qualidade do código** | O código é legível, bem nomeado e devidamente documentado? |
+| **Estilo** | Passa no lint sem avisos? |
+| **Design** | A solução é bem estruturada e fácil de estender? |

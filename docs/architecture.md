@@ -1,142 +1,142 @@
-# System Architecture
+# Arquitetura do Sistema
 
-This document describes the general architecture patterns used across Tau Rocket Team software projects. Understanding these patterns helps you contribute to any `dev.*` repository with minimal ramp-up time.
-
----
-
-## Table of Contents
-
-1. [Overview](#1-overview)
-2. [Repository Ecosystem](#2-repository-ecosystem)
-3. [Layered Architecture Pattern](#3-layered-architecture-pattern)
-4. [Data Flow](#4-data-flow)
-5. [Communication Patterns](#5-communication-patterns)
-6. [Error Handling Strategy](#6-error-handling-strategy)
-7. [Testing Architecture](#7-testing-architecture)
-8. [Deployment and CI/CD](#8-deployment-and-cicd)
+Este documento descreve os padrões de arquitetura geral utilizados nos projetos de software da Tau Rocket Team. Entender esses padrões ajuda você a contribuir com qualquer repositório `dev.*` com o mínimo de tempo de adaptação.
 
 ---
 
-## 1. Overview
+## Índice
 
-The team's software stack supports the full lifecycle of a rocket launch:
+1. [Visão Geral](#1-visão-geral)
+2. [Ecossistema de Repositórios](#2-ecossistema-de-repositórios)
+3. [Padrão de Arquitetura em Camadas](#3-padrão-de-arquitetura-em-camadas)
+4. [Fluxo de Dados](#4-fluxo-de-dados)
+5. [Padrões de Comunicação](#5-padrões-de-comunicação)
+6. [Estratégia de Tratamento de Erros](#6-estratégia-de-tratamento-de-erros)
+7. [Arquitetura de Testes](#7-arquitetura-de-testes)
+8. [Implantação e CI/CD](#8-implantação-e-cicd)
+
+---
+
+## 1. Visão Geral
+
+A pilha de software do time suporta o ciclo de vida completo de um lançamento de foguete:
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                     Ground Station                       │
-│   dev.groundstation  ←──telemetry──→  dev.simulation    │
+│                     Estação Terrestre                    │
+│   dev.groundstation  ←──telemetria──→  dev.simulation   │
 └──────────────────────────┬──────────────────────────────┘
                            │ USB / RF
                            ▼
 ┌─────────────────────────────────────────────────────────┐
-│                    Flight Computer                       │
+│                    Computador de Voo                     │
 │              dev.avionics  (embedded C/C++)              │
 └─────────────────────────────────────────────────────────┘
 ```
 
-Each layer has a clear responsibility and communicates with others through well-defined interfaces (serial protocols, REST APIs, or shared file formats).
+Cada camada tem uma responsabilidade clara e se comunica com as outras por meio de interfaces bem definidas (protocolos seriais, APIs REST ou formatos de arquivo compartilhados).
 
 ---
 
-## 2. Repository Ecosystem
+## 2. Ecossistema de Repositórios
 
-| Repository | Language(s) | Responsibility |
+| Repositório | Linguagem(ns) | Responsabilidade |
 |---|---|---|
-| `dev.training` | Markdown | Team onboarding and standards |
-| `dev.avionics` | C / C++ | Flight computer firmware |
-| `dev.groundstation` | Python | Telemetry ingestion, display, and logging |
-| `dev.simulation` | Python | Pre-flight trajectory and environment simulation |
+| `dev.training` | Markdown | Integração e padrões do time |
+| `dev.avionics` | C / C++ | Firmware do computador de voo |
+| `dev.groundstation` | Python | Ingestão, exibição e registro de telemetria |
+| `dev.simulation` | Python | Simulação de trajetória e ambiente pré-voo |
 
-### Dependency Direction
+### Direção das Dependências
 
 ```
-dev.avionics  ──(no deps)──  standalone embedded firmware
-dev.groundstation  ──reads──  telemetry from dev.avionics
-dev.simulation  ──validates──  parameters used in dev.avionics
+dev.avionics  ──(sem deps)──  firmware embarcado standalone
+dev.groundstation  ──lê──  telemetria do dev.avionics
+dev.simulation  ──valida──  parâmetros usados no dev.avionics
 ```
 
-No repository should create circular dependencies. If shared data structures are needed, define them in a shared specification document or a separate `dev.protocols` repository.
+Nenhum repositório deve criar dependências circulares. Se estruturas de dados compartilhadas forem necessárias, defina-as em um documento de especificação compartilhado ou em um repositório `dev.protocols` separado.
 
 ---
 
-## 3. Layered Architecture Pattern
+## 3. Padrão de Arquitetura em Camadas
 
-Each project follows a **layered architecture** to separate concerns:
+Cada projeto segue uma **arquitetura em camadas** para separar responsabilidades:
 
 ```
 ┌──────────────────┐
-│   Presentation   │  CLI, GUI, serial output
+│   Apresentação   │  CLI, GUI, saída serial
 ├──────────────────┤
-│   Application    │  Business logic, state machines
+│   Aplicação      │  Lógica de negócio, máquinas de estado
 ├──────────────────┤
-│     Domain       │  Core data structures and algorithms
+│     Domínio      │  Estruturas de dados e algoritmos centrais
 ├──────────────────┤
-│  Infrastructure  │  Hardware drivers, I/O, file system, networking
+│  Infraestrutura  │  Drivers de hardware, E/S, sistema de arquivos, rede
 └──────────────────┘
 ```
 
-**Rules:**
-- Higher layers may depend on lower layers, but never the reverse.
-- Domain layer has **no external dependencies** — it is pure logic.
-- Infrastructure layer is the only place to interact with hardware or the OS.
+**Regras:**
+- Camadas superiores podem depender de camadas inferiores, mas nunca o contrário.
+- A camada de domínio não tem **dependências externas** — é lógica pura.
+- A camada de infraestrutura é o único lugar para interagir com hardware ou o SO.
 
-### Example (avionics firmware)
+### Exemplo (firmware de aviônica)
 
 ```
 src/
-├── presentation/    # Serial output formatting
-├── application/     # Flight state machine (IDLE → ARMED → POWERED → COAST → ...)
-├── domain/          # Physics calculations, sensor fusion
-└── infrastructure/  # SPI/I2C drivers, flash storage, UART
+├── presentation/    # Formatação de saída serial
+├── application/     # Máquina de estado de voo (IDLE → ARMED → POWERED → COAST → ...)
+├── domain/          # Cálculos físicos, fusão de sensores
+└── infrastructure/  # Drivers SPI/I2C, armazenamento flash, UART
 ```
 
 ---
 
-## 4. Data Flow
+## 4. Fluxo de Dados
 
-### Telemetry Pipeline
+### Pipeline de Telemetria
 
 ```
 Sensor (IMU/Baro/GPS)
     │
-    ▼ raw bytes
-Driver (infrastructure layer)
+    ▼ bytes brutos
+Driver (camada de infraestrutura)
     │
-    ▼ structured reading
-Sensor Fusion (domain layer)
+    ▼ leitura estruturada
+Fusão de Sensores (camada de domínio)
     │
-    ▼ fused state vector
-Flight State Machine (application layer)
+    ▼ vetor de estado fundido
+Máquina de Estado de Voo (camada de aplicação)
     │
-    ▼ telemetry packet
-Serial Encoder (presentation layer)
+    ▼ pacote de telemetria
+Codificador Serial (camada de apresentação)
     │
     ▼ UART / RF
-Ground Station
+Estação Terrestre
 ```
 
-### Ground Station Pipeline
+### Pipeline da Estação Terrestre
 
 ```
-Serial / RF input
+Entrada serial / RF
     │
     ▼
-Packet Parser  ──error──▶  Error Logger
+Parser de Pacotes  ──erro──▶  Logger de Erros
     │
-    ▼ parsed frame
-Telemetry Store (in-memory + file)
+    ▼ frame analisado
+Armazenamento de Telemetria (memória + arquivo)
     │
-    ├──▶  Real-time Dashboard (GUI)
-    └──▶  Data Logger (CSV / SQLite)
+    ├──▶  Dashboard em Tempo Real (GUI)
+    └──▶  Logger de Dados (CSV / SQLite)
 ```
 
 ---
 
-## 5. Communication Patterns
+## 5. Padrões de Comunicação
 
-### Serial Telemetry Protocol
+### Protocolo de Telemetria Serial
 
-Packets have a fixed-length header followed by a variable payload:
+Os pacotes têm um cabeçalho de comprimento fixo seguido de um payload variável:
 
 ```
 ┌──────┬──────────┬────────┬───────────────┬──────┐
@@ -145,14 +145,14 @@ Packets have a fixed-length header followed by a variable payload:
 └──────┴──────────┴────────┴───────────────┴──────┘
 ```
 
-- `0xAA` — sync byte, always present.
-- `MSG_TYPE` — identifies the payload schema.
-- `LENGTH` — payload length in bytes (little-endian).
-- `CRC8` — checksum over `MSG_TYPE + LENGTH + PAYLOAD`.
+- `0xAA` — byte de sincronização, sempre presente.
+- `MSG_TYPE` — identifica o esquema do payload.
+- `LENGTH` — comprimento do payload em bytes (little-endian).
+- `CRC8` — checksum sobre `MSG_TYPE + LENGTH + PAYLOAD`.
 
-### REST API (Ground Station ↔ Simulation)
+### API REST (Estação Terrestre ↔ Simulação)
 
-Where applicable, services expose a simple REST API. Always version the API:
+Onde aplicável, os serviços expõem uma API REST simples. Sempre versione a API:
 
 ```
 GET  /api/v1/telemetry/latest
@@ -162,45 +162,45 @@ POST /api/v1/simulation/run
 
 ---
 
-## 6. Error Handling Strategy
+## 6. Estratégia de Tratamento de Erros
 
-- **Embedded (C/C++)**: Return error codes; never use exceptions in ISR context. Use `assert()` only in debug builds.
-- **Python**: Use typed exceptions. Define a project-specific exception hierarchy that extends built-in types.
-- **Never swallow errors silently** — at minimum, log them.
-- **Fail fast** in non-critical code paths; **degrade gracefully** in mission-critical paths (e.g., fall back to last-known-good sensor data before disabling a channel entirely).
+- **Embarcado (C/C++)**: Retorne códigos de erro; nunca use exceções em contexto de ISR. Use `assert()` apenas em builds de debug.
+- **Python**: Use exceções tipadas. Defina uma hierarquia de exceções específica do projeto que estende os tipos embutidos.
+- **Nunca engula erros silenciosamente** — no mínimo, registre-os.
+- **Falhe rapidamente** em caminhos de código não críticos; **degrade graciosamente** em caminhos críticos (ex.: recorra aos dados do último sensor válido conhecido antes de desabilitar um canal completamente).
 
 ---
 
-## 7. Testing Architecture
+## 7. Arquitetura de Testes
 
 ```
 tests/
-├── unit/         # Test individual functions / classes in isolation
-├── integration/  # Test interactions between modules
-└── e2e/          # End-to-end scenario tests (e.g., full telemetry pipeline)
+├── unit/         # Teste funções / classes individuais em isolamento
+├── integration/  # Teste interações entre módulos
+└── e2e/          # Testes de cenário end-to-end (ex.: pipeline completo de telemetria)
 ```
 
-| Test Type | Speed | Scope | Run in CI |
+| Tipo de Teste | Velocidade | Escopo | Executar no CI |
 |---|---|---|---|
-| Unit | Fast (< 1s each) | Single function/class | Always |
-| Integration | Medium (< 10s each) | Module boundary | Always |
-| E2E | Slow (minutes) | Full system | On merge to `main` |
+| Unitário | Rápido (< 1s cada) | Única função/classe | Sempre |
+| Integração | Médio (< 10s cada) | Fronteira do módulo | Sempre |
+| E2E | Lento (minutos) | Sistema completo | Ao fazer merge no `main` |
 
-All tests must pass before a PR can be merged.
+Todos os testes devem passar antes que um PR possa ser integrado.
 
 ---
 
-## 8. Deployment and CI/CD
+## 8. Implantação e CI/CD
 
-Every `dev.*` repository should include a `.github/workflows/` directory with at minimum:
+Todo repositório `dev.*` deve incluir um diretório `.github/workflows/` com no mínimo:
 
-- **`ci.yml`** — runs on every push and PR: lint, build, and unit tests.
-- **`release.yml`** — triggered on `v*` tags: builds release artifacts and creates a GitHub Release.
+- **`ci.yml`** — executado a cada push e PR: lint, build e testes unitários.
+- **`release.yml`** — acionado em tags `v*`: cria artefatos de release e uma GitHub Release.
 
-### Typical CI Pipeline
+### Pipeline Típico de CI
 
 ```
-push / PR opened
+push / PR aberto
       │
       ▼
 ┌─────────────┐     ┌──────────┐     ┌─────────────┐
@@ -208,7 +208,7 @@ push / PR opened
 │ (ruff/clang)│     │(cmake/py)│     │(pytest/gtest)│
 └─────────────┘     └──────────┘     └─────────────┘
                                            │
-                                     ✅ All pass?
+                                     ✅ Tudo passou?
                                            │
-                                     PR can be merged
+                                     PR pode ser integrado
 ```

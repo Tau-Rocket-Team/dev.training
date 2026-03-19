@@ -1,80 +1,80 @@
-# Development Guidelines
+# Diretrizes de Desenvolvimento
 
-This document defines the standards every developer on the team must follow. Consistent practices reduce friction, make code reviews faster, and keep the codebase maintainable as the team grows.
+Este documento define os padrões que todo desenvolvedor do time deve seguir. Práticas consistentes reduzem o atrito, tornam as revisões de código mais rápidas e mantêm a base de código sustentável à medida que o time cresce.
 
 ---
 
-## Table of Contents
+## Índice
 
-1. [Git Workflow](#1-git-workflow)
-2. [Branching Strategy](#2-branching-strategy)
-3. [Commit Messages](#3-commit-messages)
+1. [Fluxo de Trabalho Git](#1-fluxo-de-trabalho-git)
+2. [Estratégia de Branches](#2-estratégia-de-branches)
+3. [Mensagens de Commit](#3-mensagens-de-commit)
 4. [Pull Requests](#4-pull-requests)
-5. [Code Review Etiquette](#5-code-review-etiquette)
-6. [Naming Conventions](#6-naming-conventions)
-7. [Clean Code Principles](#7-clean-code-principles)
-8. [Project Structure](#8-project-structure)
-9. [Documentation Standards](#9-documentation-standards)
+5. [Etiqueta de Code Review](#5-etiqueta-de-code-review)
+6. [Convenções de Nomenclatura](#6-convenções-de-nomenclatura)
+7. [Princípios de Código Limpo](#7-princípios-de-código-limpo)
+8. [Estrutura do Projeto](#8-estrutura-do-projeto)
+9. [Padrões de Documentação](#9-padrões-de-documentação)
 
 ---
 
-## 1. Git Workflow
+## 1. Fluxo de Trabalho Git
 
-We follow a simplified **GitHub Flow**:
+Seguimos um **GitHub Flow** simplificado:
 
 ```
-main  ←── feature branch (PR + review) ←── your local branch
+main  ←── branch de funcionalidade (PR + revisão) ←── seu branch local
 ```
 
-**Rules:**
-- `main` is always deployable / stable.
-- **Never** force-push to `main`.
-- Every change must be made in its own branch and merged via a pull request.
-- Delete your branch after the PR is merged.
+**Regras:**
+- `main` é sempre implantável / estável.
+- **Nunca** faça force-push no `main`.
+- Toda mudança deve ser feita em seu próprio branch e integrada via pull request.
+- Exclua seu branch após o merge do PR.
 
 ---
 
-## 2. Branching Strategy
+## 2. Estratégia de Branches
 
-Branch names follow the pattern `<type>/<short-description>`:
+Os nomes de branches seguem o padrão `<type>/<short-description>`:
 
-| Type | When to use | Example |
+| Tipo | Quando usar | Exemplo |
 |---|---|---|
-| `feat` | New feature or capability | `feat/add-gps-parser` |
-| `fix` | Bug fix | `fix/sensor-overflow-bug` |
-| `docs` | Documentation only | `docs/update-onboarding` |
-| `refactor` | Code restructuring, no behaviour change | `refactor/extract-telemetry-utils` |
-| `test` | Adding or fixing tests | `test/gps-unit-tests` |
-| `chore` | Build scripts, CI, dependencies | `chore/update-dependencies` |
+| `feat` | Nova funcionalidade ou capacidade | `feat/add-gps-parser` |
+| `fix` | Correção de bug | `fix/sensor-overflow-bug` |
+| `docs` | Apenas documentação | `docs/update-onboarding` |
+| `refactor` | Reestruturação de código, sem mudança de comportamento | `refactor/extract-telemetry-utils` |
+| `test` | Adicionando ou corrigindo testes | `test/gps-unit-tests` |
+| `chore` | Scripts de build, CI, dependências | `chore/update-dependencies` |
 
-**Rules:**
-- Use **lowercase** and **hyphens** only — no spaces or underscores.
-- Keep the description short (2–4 words).
-- Branch from the latest `main`: `git checkout -b feat/my-feature origin/main`.
+**Regras:**
+- Use apenas **letras minúsculas** e **hífens** — sem espaços ou underscores.
+- Mantenha a descrição curta (2–4 palavras).
+- Crie branches a partir do `main` mais recente: `git checkout -b feat/my-feature origin/main`.
 
 ---
 
-## 3. Commit Messages
+## 3. Mensagens de Commit
 
-We follow the [Conventional Commits](https://www.conventionalcommits.org/) specification.
+Seguimos a especificação [Conventional Commits](https://www.conventionalcommits.org/).
 
-### Format
+### Formato
 
 ```
 <type>(<scope>): <subject>
 
-[optional body]
+[corpo opcional]
 
-[optional footer]
+[rodapé opcional]
 ```
 
-### Rules
+### Regras
 
-- **Subject line**: imperative mood, ≤72 characters, no period at the end.
-- **Body**: explain *what* and *why*, not *how*. Wrap at 72 characters.
-- **Footer**: reference issues (`Closes #42`, `Refs #7`).
+- **Linha de assunto**: modo imperativo, ≤72 caracteres, sem ponto no final.
+- **Corpo**: explique *o quê* e *por quê*, não *como*. Quebre em 72 caracteres.
+- **Rodapé**: referencie issues (`Closes #42`, `Refs #7`).
 
-### Examples
+### Exemplos
 
 ```
 feat(telemetry): add CRC validation for incoming packets
@@ -102,51 +102,51 @@ docs(onboarding): add SSH setup instructions
 
 ## 4. Pull Requests
 
-Use the [`templates/pull_request_template.md`](../templates/pull_request_template.md) when opening a PR.
+Use o [`templates/pull_request_template.md`](../templates/pull_request_template.md) ao abrir um PR.
 
-**Requirements:**
-- Link the related issue (`Closes #<number>`).
-- Provide a clear description of *what* changed and *why*.
-- Include screenshots or test output where applicable.
-- All CI checks must pass before requesting review.
-- At least **one approval** from a team member is required before merging.
-- Prefer **squash and merge** to keep `main` history clean.
+**Requisitos:**
+- Vincule a issue relacionada (`Closes #<número>`).
+- Forneça uma descrição clara do *que* mudou e *por quê*.
+- Inclua capturas de tela ou saída de testes quando aplicável.
+- Todas as verificações de CI devem passar antes de solicitar revisão.
+- Pelo menos **uma aprovação** de um membro do time é necessária antes do merge.
+- Prefira **squash and merge** para manter o histórico do `main` limpo.
 
-**PR Size:**
-- Keep PRs small and focused. A good rule of thumb: a reviewer should be able to fully understand the change in 20 minutes.
-- If a PR is getting large, split it into smaller, sequential PRs.
-
----
-
-## 5. Code Review Etiquette
-
-**As a reviewer:**
-- Review within 48 hours of being assigned.
-- Be specific: point to the exact line and explain the concern.
-- Distinguish between blockers (`BLOCKING:`) and suggestions (`NIT:` / `SUGGESTION:`).
-- Approve when you are satisfied — don't leave PRs open indefinitely.
-
-**As an author:**
-- Respond to every comment, even if only to acknowledge it.
-- Don't take feedback personally — it's about the code, not you.
-- If you disagree with a comment, explain your reasoning clearly.
+**Tamanho do PR:**
+- Mantenha os PRs pequenos e focados. Uma boa regra: um revisor deve conseguir entender completamente a mudança em 20 minutos.
+- Se um PR está ficando grande, divida-o em PRs menores e sequenciais.
 
 ---
 
-## 6. Naming Conventions
+## 5. Etiqueta de Code Review
 
-### Files and Directories
-- Use `snake_case` for Python files and scripts: `sensor_parser.py`
-- Use `kebab-case` for Markdown and config files: `onboarding.md`, `docker-compose.yml`
-- Use `PascalCase` for class files where the language convention demands it (e.g., C++): `TelemetryFrame.hpp`
+**Como revisor:**
+- Revise dentro de 48 horas após ser atribuído.
+- Seja específico: aponte a linha exata e explique a preocupação.
+- Distinga entre bloqueadores (`BLOCKING:`) e sugestões (`NIT:` / `SUGGESTION:`).
+- Aprove quando estiver satisfeito — não deixe PRs abertos indefinidamente.
 
-### Variables and Functions (Python)
+**Como autor:**
+- Responda a cada comentário, mesmo que apenas para reconhecê-lo.
+- Não leve o feedback para o lado pessoal — é sobre o código, não sobre você.
+- Se discordar de um comentário, explique seu raciocínio claramente.
+
+---
+
+## 6. Convenções de Nomenclatura
+
+### Arquivos e Diretórios
+- Use `snake_case` para arquivos Python e scripts: `sensor_parser.py`
+- Use `kebab-case` para arquivos Markdown e de configuração: `onboarding.md`, `docker-compose.yml`
+- Use `PascalCase` para arquivos de classe onde a convenção da linguagem exige (ex.: C++): `TelemetryFrame.hpp`
+
+### Variáveis e Funções (Python)
 ```python
-# Variables: snake_case
+# Variáveis: snake_case
 packet_count = 0
 sensor_data = []
 
-# Functions: snake_case, verb-first
+# Funções: snake_case, verbo primeiro
 def parse_gps_frame(raw_bytes):
     ...
 
@@ -154,51 +154,51 @@ def parse_gps_frame(raw_bytes):
 class TelemetryParser:
     ...
 
-# Constants: UPPER_SNAKE_CASE
+# Constantes: UPPER_SNAKE_CASE
 MAX_PACKET_SIZE = 1024
 DEFAULT_BAUD_RATE = 115200
 ```
 
-### Variables and Functions (C / C++)
+### Variáveis e Funções (C / C++)
 ```cpp
-// Variables: camelCase or snake_case (be consistent per project)
+// Variáveis: camelCase ou snake_case (seja consistente por projeto)
 uint32_t packetCount = 0;
 
-// Functions: camelCase
+// Funções: camelCase
 void parseTelemetryFrame(uint8_t* buffer, size_t len);
 
 // Classes / Structs: PascalCase
 class TelemetryParser { ... };
 
-// Constants / Macros: UPPER_SNAKE_CASE
+// Constantes / Macros: UPPER_SNAKE_CASE
 #define MAX_PACKET_SIZE 1024
 ```
 
-### Branches and Tags
-- Branches: `feat/short-description` (see §2)
-- Release tags: `v<major>.<minor>.<patch>` (e.g., `v1.2.0`)
+### Branches e Tags
+- Branches: `feat/short-description` (veja §2)
+- Tags de release: `v<major>.<minor>.<patch>` (ex.: `v1.2.0`)
 
 ---
 
-## 7. Clean Code Principles
+## 7. Princípios de Código Limpo
 
-1. **Readable over clever** — code is read far more than it is written.
-2. **Single responsibility** — every function and class does one thing well.
-3. **Meaningful names** — a good name is better than a comment.
-4. **Keep functions small** — if a function needs scrolling, it probably does too much.
-5. **No magic numbers** — replace literals with named constants.
-6. **Don't repeat yourself (DRY)** — extract repeated logic into reusable functions.
-7. **Fail loudly** — raise exceptions / errors rather than silently ignoring failures.
-8. **Leave the code cleaner than you found it** — fix small issues you encounter, even if they are not in your ticket.
+1. **Legível em vez de inteligente** — o código é lido muito mais do que escrito.
+2. **Responsabilidade única** — cada função e classe faz uma coisa bem.
+3. **Nomes significativos** — um bom nome é melhor que um comentário.
+4. **Mantenha funções pequenas** — se uma função precisa de rolagem, provavelmente faz demais.
+5. **Sem números mágicos** — substitua literais por constantes nomeadas.
+6. **Não se repita (DRY)** — extraia a lógica repetida em funções reutilizáveis.
+7. **Falhe alto** — lance exceções / erros em vez de ignorar falhas silenciosamente.
+8. **Deixe o código mais limpo do que encontrou** — corrija pequenos problemas que encontrar, mesmo que não estejam na sua tarefa.
 
-### Example: Before vs. After
+### Exemplo: Antes vs. Depois
 
 ```python
-# ❌ Hard to understand
+# ❌ Difícil de entender
 def p(d, t):
     return d * 1000 / t
 
-# ✅ Clear and maintainable
+# ✅ Claro e sustentável
 METERS_PER_KILOMETER = 1000
 
 def calculate_speed_kph(distance_meters: float, time_seconds: float) -> float:
@@ -208,36 +208,36 @@ def calculate_speed_kph(distance_meters: float, time_seconds: float) -> float:
 
 ---
 
-## 8. Project Structure
+## 8. Estrutura do Projeto
 
-Every `dev.*` repository should follow this layout:
+Todo repositório `dev.*` deve seguir este layout:
 
 ```
 dev.<projectName>/
-├── README.md           # Project overview (use templates/project_template.md)
-├── CONTRIBUTING.md     # How to contribute to this specific project
-├── src/                # Source code
+├── README.md           # Visão geral do projeto (use templates/project_template.md)
+├── CONTRIBUTING.md     # Como contribuir com este projeto específico
+├── src/                # Código-fonte
 │   ├── <module>/
 │   └── main.py / main.cpp
-├── tests/              # Unit and integration tests
-├── docs/               # Project-specific documentation
-├── scripts/            # Build, deploy, and utility scripts
+├── tests/              # Testes unitários e de integração
+├── docs/               # Documentação específica do projeto
+├── scripts/            # Scripts de build, deploy e utilitários
 ├── .github/
-│   ├── workflows/      # CI/CD pipelines
+│   ├── workflows/      # Pipelines de CI/CD
 │   └── PULL_REQUEST_TEMPLATE.md
 └── .gitignore
 ```
 
 ---
 
-## 9. Documentation Standards
+## 9. Padrões de Documentação
 
-- Every public function, class, and module must have a docstring / doc comment.
-- Keep documentation close to the code — update docs in the same PR as the code change.
-- Use Markdown for all written documentation.
-- Use tables, code blocks, and headers to improve readability.
+- Toda função pública, classe e módulo deve ter uma docstring / comentário de documentação.
+- Mantenha a documentação próxima ao código — atualize os docs no mesmo PR que a mudança de código.
+- Use Markdown para toda documentação escrita.
+- Use tabelas, blocos de código e cabeçalhos para melhorar a legibilidade.
 
-**Python docstring example:**
+**Exemplo de docstring Python:**
 ```python
 def parse_nmea_sentence(sentence: str) -> dict:
     """

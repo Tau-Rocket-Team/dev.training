@@ -1,58 +1,58 @@
-# Mentor Feedback and Evaluations
+# Feedback e Avaliações dos Mentores
 
-This file records mentor feedback given to developers during the training programme. It serves as a learning log and helps track growth over time.
-
----
-
-## How to Use This File
-
-- Mentors add a feedback entry after each significant review or milestone.
-- Each entry should be constructive, specific, and actionable.
-- Developers are encouraged to read their entries and respond with their reflections.
-- Keep feedback professional and focused on code and skills — never personal.
+Este arquivo registra o feedback dado pelos mentores aos desenvolvedores durante o programa de treinamento. Serve como um registro de aprendizado e ajuda a acompanhar o crescimento ao longo do tempo.
 
 ---
 
-## Feedback Entry Template
+## Como Usar Este Arquivo
+
+- Os mentores adicionam uma entrada de feedback após cada revisão ou marco significativo.
+- Cada entrada deve ser construtiva, específica e acionável.
+- Os desenvolvedores são encorajados a ler suas entradas e responder com suas reflexões.
+- Mantenha o feedback profissional e focado em código e habilidades — nunca pessoal.
+
+---
+
+## Template de Entrada de Feedback
 
 ```markdown
-### @github-username — <Session Type> — YYYY-MM-DD
+### @github-username — <Tipo de Sessão> — AAAA-MM-DD
 
-**Reviewer:** @mentor-github-username  
-**Related PR / Issue:** #<number>  
+**Revisor:** @mentor-github-username  
+**PR / Issue Relacionado:** #<número>  
 
-#### Strengths Observed
+#### Pontos Fortes Observados
 - ...
 
-#### Areas for Improvement
+#### Áreas de Melhoria
 - ...
 
-#### Action Items
+#### Itens de Ação
 - [ ] ...
 
-#### Developer Reflection (optional)
+#### Reflexão do Desenvolvedor (opcional)
 > ...
 ```
 
 ---
 
-## Feedback Log
+## Registro de Feedback
 
-<!-- Add entries below in reverse chronological order (newest first) -->
+<!-- Adicione entradas abaixo em ordem cronológica inversa (mais recente primeiro) -->
 
-> No feedback entries yet. First entries will be added after initial mentor reviews.
+> Nenhuma entrada de feedback ainda. As primeiras entradas serão adicionadas após as revisões iniciais com os mentores.
 
 ---
 
-## Evaluation Rubric
+## Rubrica de Avaliação
 
-Mentors use the following rubric when evaluating submissions:
+Os mentores usam a seguinte rubrica ao avaliar as submissões:
 
-| Category | Excellent (4) | Good (3) | Developing (2) | Needs Work (1) |
+| Categoria | Excelente (4) | Bom (3) | Em Desenvolvimento (2) | Precisa Melhorar (1) |
 |---|---|---|---|---|
-| **Correctness** | All cases handled perfectly | Minor edge cases missed | Some cases incorrect | Core logic incorrect |
-| **Testing** | Comprehensive, >90% coverage | Good coverage of main paths | Basic tests only | Few or no tests |
-| **Code Quality** | Highly readable, clean, idiomatic | Mostly clean with minor issues | Readable but some issues | Hard to read or follow |
-| **Documentation** | Excellent docstrings and comments | Adequate documentation | Minimal documentation | No documentation |
-| **Design** | Well-structured, easy to extend | Reasonable structure | Some coupling or complexity | Poor separation of concerns |
-| **Git Hygiene** | Clean commits, good PR description | Mostly clean | Some messy commits | Squashed everything / no messages |
+| **Correção** | Todos os casos tratados perfeitamente | Casos extremos menores perdidos | Alguns casos incorretos | Lógica central incorreta |
+| **Testes** | Abrangente, >90% de cobertura | Boa cobertura dos caminhos principais | Apenas testes básicos | Poucos ou nenhum teste |
+| **Qualidade do Código** | Altamente legível, limpo, idiomático | Principalmente limpo com problemas menores | Legível mas com alguns problemas | Difícil de ler ou seguir |
+| **Documentação** | Excelentes docstrings e comentários | Documentação adequada | Documentação mínima | Sem documentação |
+| **Design** | Bem estruturado, fácil de estender | Estrutura razoável | Algum acoplamento ou complexidade | Fraca separação de responsabilidades |
+| **Higiene Git** | Commits limpos, boa descrição de PR | Principalmente limpo | Alguns commits bagunçados | Tudo em squash / sem mensagens |

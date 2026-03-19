@@ -1,27 +1,27 @@
-## Summary
+## Resumo
 
-<!-- Provide a concise description of the change. What does this PR do and why? -->
+<!-- Forneça uma descrição concisa da mudança. O que este PR faz e por quê? -->
 
-Closes #<!-- issue number -->
-
----
-
-## Type of Change
-
-<!-- Put an `x` in all boxes that apply -->
-
-- [ ] `feat` — New feature or capability
-- [ ] `fix` — Bug fix
-- [ ] `docs` — Documentation update
-- [ ] `refactor` — Code restructuring (no behavior change)
-- [ ] `test` — Adding or updating tests
-- [ ] `chore` — Build scripts, dependencies, CI
+Closes #<!-- número da issue -->
 
 ---
 
-## Changes Made
+## Tipo de Mudança
 
-<!-- List the key changes. Be specific. -->
+<!-- Coloque um `x` em todas as caixas que se aplicam -->
+
+- [ ] `feat` — Nova funcionalidade ou capacidade
+- [ ] `fix` — Correção de bug
+- [ ] `docs` — Atualização de documentação
+- [ ] `refactor` — Reestruturação de código (sem mudança de comportamento)
+- [ ] `test` — Adicionando ou atualizando testes
+- [ ] `chore` — Scripts de build, dependências, CI
+
+---
+
+## Mudanças Realizadas
+
+<!-- Liste as principais mudanças. Seja específico. -->
 
 -
 -
@@ -29,37 +29,37 @@ Closes #<!-- issue number -->
 
 ---
 
-## Testing
+## Testes
 
-<!-- Describe how you tested this change -->
+<!-- Descreva como você testou esta mudança -->
 
-- [ ] Unit tests added / updated
-- [ ] All existing tests pass (`pytest` / `ctest`)
-- [ ] Linting passes (`ruff check .` / `clang-format`)
-- [ ] Tested manually — describe below:
+- [ ] Testes unitários adicionados / atualizados
+- [ ] Todos os testes existentes passam (`pytest` / `ctest`)
+- [ ] Lint passa (`ruff check .` / `clang-format`)
+- [ ] Testado manualmente — descreva abaixo:
 
-**Manual testing notes:**
+**Notas de testes manuais:**
 
-<!-- e.g., "Ran the parser against 1000 sample packets, all decoded correctly." -->
+<!-- ex.: "Executei o parser com 1000 pacotes de amostra, todos decodificados corretamente." -->
 
 ---
 
-## Screenshots / Output
+## Capturas de Tela / Saída
 
-<!-- If applicable, attach screenshots, terminal output, or data plots -->
+<!-- Se aplicável, anexe capturas de tela, saída do terminal ou gráficos de dados -->
 
 ---
 
 ## Checklist
 
-- [ ] My branch is up to date with `main`
-- [ ] My commit messages follow the Conventional Commits format
-- [ ] I have added or updated documentation where relevant
-- [ ] I have reviewed my own diff before requesting review
-- [ ] I have assigned at least one reviewer
+- [ ] Meu branch está atualizado com `main`
+- [ ] Minhas mensagens de commit seguem o formato Conventional Commits
+- [ ] Adicionei ou atualizei a documentação onde relevante
+- [ ] Revisei meu próprio diff antes de solicitar revisão
+- [ ] Atribuí pelo menos um revisor
 
 ---
 
-## Reviewer Notes
+## Notas para o Revisor
 
-<!-- Anything specific you'd like reviewers to focus on? Questions you have? -->
+<!-- Algo específico que você gostaria que os revisores focassem? Alguma dúvida? -->

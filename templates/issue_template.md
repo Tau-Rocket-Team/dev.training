@@ -1,97 +1,97 @@
 ---
-name: Bug Report / Feature Request / Question
-about: Use this template for all new issues
+name: Relatório de Bug / Solicitação de Funcionalidade / Pergunta
+about: Use este template para todas as novas issues
 ---
 
-## Issue Type
+## Tipo de Issue
 
-<!-- Put an `x` in exactly one box -->
+<!-- Coloque um `x` em exatamente uma caixa -->
 
-- [ ] 🐛 Bug report
-- [ ] ✨ Feature request
-- [ ] 📚 Documentation improvement
-- [ ] ❓ Question / help needed
-- [ ] 🎓 Training task (mentors only)
-
----
-
-## Summary
-
-<!-- One or two sentences describing the issue clearly -->
+- [ ] 🐛 Relatório de bug
+- [ ] ✨ Solicitação de funcionalidade
+- [ ] 📚 Melhoria de documentação
+- [ ] ❓ Pergunta / ajuda necessária
+- [ ] 🎓 Tarefa de treinamento (apenas mentores)
 
 ---
 
-## Details
+## Resumo
 
-### For Bug Reports
+<!-- Uma ou duas frases descrevendo a issue claramente -->
 
-**What happened?**
+---
 
-<!-- Describe what you observed -->
+## Detalhes
 
-**What did you expect to happen?**
+### Para Relatórios de Bug
 
-<!-- Describe what you expected -->
+**O que aconteceu?**
 
-**Steps to reproduce:**
+<!-- Descreva o que você observou -->
+
+**O que você esperava que acontecesse?**
+
+<!-- Descreva o que você esperava -->
+
+**Passos para reproduzir:**
 
 1.
 2.
 3.
 
-**Environment:**
+**Ambiente:**
 
-- OS:
-- Python / compiler version:
-- Repository and branch:
+- SO:
+- Versão do Python / compilador:
+- Repositório e branch:
 
-**Error output / logs:**
+**Saída de erro / logs:**
 
 ```
-paste error here
+cole o erro aqui
 ```
 
 ---
 
-### For Feature Requests
+### Para Solicitações de Funcionalidade
 
-**Problem being solved:**
+**Problema que está sendo resolvido:**
 
-<!-- What pain point does this address? -->
+<!-- Qual ponto de dor isso resolve? -->
 
-**Proposed solution:**
+**Solução proposta:**
 
-<!-- Describe your idea -->
+<!-- Descreva sua ideia -->
 
-**Alternatives considered:**
+**Alternativas consideradas:**
 
-<!-- Any other approaches you thought about? -->
+<!-- Outras abordagens que você pensou? -->
 
 ---
 
-### For Questions
+### Para Perguntas
 
-**What are you trying to do?**
+**O que você está tentando fazer?**
 
-**What have you already tried?**
+**O que você já tentou?**
 
-**Relevant code or context:**
+**Código ou contexto relevante:**
 
 ```python
-# paste relevant code here
+# cole o código relevante aqui
 ```
 
 ---
 
-## Additional Context
+## Contexto Adicional
 
-<!-- Screenshots, links, related issues -->
+<!-- Capturas de tela, links, issues relacionadas -->
 
 ---
 
-## Acceptance Criteria (optional)
+## Critérios de Aceitação (opcional)
 
-<!-- If this is a task or feature, what does "done" look like? -->
+<!-- Se esta é uma tarefa ou funcionalidade, como é o "concluído"? -->
 
 - [ ]
 - [ ]

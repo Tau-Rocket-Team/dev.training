@@ -1,51 +1,51 @@
-# Intermediate Challenge 02 — Flight State Machine
+# Desafio Intermediário 02 — Máquina de Estado de Voo
 
-**Difficulty:** Intermediate  
-**Estimated time:** 3–4 hours  
-**Skills practiced:** State machines, OOP, event-driven design, testing
-
----
-
-## Background
-
-A flight computer's core logic is a **finite state machine (FSM)** that transitions through well-defined phases based on sensor events. Implementing this correctly — and verifying every transition — is safety-critical work.
+**Dificuldade:** Intermediário  
+**Tempo estimado:** 3–4 horas  
+**Habilidades praticadas:** Máquinas de estado, POO, design orientado a eventos, testes
 
 ---
 
-## Problem Statement
+## Contexto
 
-Implement a `FlightStateMachine` class that models the lifecycle of a rocket flight.
+A lógica central de um computador de voo é uma **máquina de estados finitos (FSM)** que transita por fases bem definidas com base em eventos de sensores. Implementar isso corretamente — e verificar cada transição — é um trabalho crítico para a segurança.
 
-### States
+---
+
+## Enunciado do Problema
+
+Implemente uma classe `FlightStateMachine` que modele o ciclo de vida de um voo de foguete.
+
+### Estados
 
 ```
 IDLE → ARMED → POWERED_ASCENT → COASTING → APOGEE → DESCENT → LANDED
                                                 ↓
-                                          (on detection)
+                                          (ao detectar)
 ```
 
-| State | Description |
+| Estado | Descrição |
 |---|---|
-| `IDLE` | Pre-launch; awaiting arm command |
-| `ARMED` | Ready to detect liftoff |
-| `POWERED_ASCENT` | Motor burning; high acceleration |
-| `COASTING` | Motor burned out; ascending on momentum |
-| `APOGEE` | Peak altitude detected; deploy drogue |
-| `DESCENT` | Descending under parachute |
-| `LANDED` | Below threshold velocity on ground |
+| `IDLE` | Pré-lançamento; aguardando comando de armamento |
+| `ARMED` | Pronto para detectar decolagem |
+| `POWERED_ASCENT` | Motor queimando; alta aceleração |
+| `COASTING` | Motor esgotado; subindo por inércia |
+| `APOGEE` | Altitude máxima detectada; implantar drogue |
+| `DESCENT` | Descendo sob paraquedas |
+| `LANDED` | Velocidade abaixo do limiar no solo |
 
-### Events / Transitions
+### Eventos / Transições
 
-| From | Event | To |
+| De | Evento | Para |
 |---|---|---|
-| `IDLE` | `arm()` called | `ARMED` |
-| `ARMED` | Acceleration > 20 m/s² | `POWERED_ASCENT` |
-| `POWERED_ASCENT` | Acceleration < 5 m/s² (burnout) | `COASTING` |
-| `COASTING` | Vertical velocity ≤ 0 (apogee) | `APOGEE` |
-| `APOGEE` | Automatically | `DESCENT` |
-| `DESCENT` | Altitude < 50m AND velocity < 5 m/s | `LANDED` |
+| `IDLE` | `arm()` chamado | `ARMED` |
+| `ARMED` | Aceleração > 20 m/s² | `POWERED_ASCENT` |
+| `POWERED_ASCENT` | Aceleração < 5 m/s² (burnout) | `COASTING` |
+| `COASTING` | Velocidade vertical ≤ 0 (apogeu) | `APOGEE` |
+| `APOGEE` | Automaticamente | `DESCENT` |
+| `DESCENT` | Altitude < 50m E velocidade < 5 m/s | `LANDED` |
 
-### Required Interface
+### Interface Necessária
 
 ```python
 class FlightStateMachine:
@@ -66,7 +66,7 @@ class FlightStateMachine:
         """Return True if the FSM has reached LANDED."""
 ```
 
-### Example Usage
+### Exemplo de Uso
 
 ```python
 fsm = FlightStateMachine()
@@ -81,30 +81,30 @@ print(fsm.is_terminal())            # True
 
 ---
 
-## Requirements
+## Requisitos
 
-1. Implement `FlightStateMachine` with all states and transitions.
-2. Illegal transitions must raise `RuntimeError` with a descriptive message.
-3. Each state transition must append an entry to `self.events`.
-4. Write unit tests covering:
-   - Happy-path flight from `IDLE` to `LANDED`.
-   - Illegal transition attempts.
-   - Each individual state transition.
-   - Multiple sensor updates that don't trigger a transition.
-
----
-
-## Bonus
-
-- Add a `disarm()` method that transitions `ARMED → IDLE` (abort scenario).
-- Add a `reset()` method that returns the FSM to `IDLE` from any state (safe recovery after anomaly).
-- Persist the event log to a JSON file.
+1. Implemente `FlightStateMachine` com todos os estados e transições.
+2. Transições ilegais devem lançar `RuntimeError` com uma mensagem descritiva.
+3. Cada transição de estado deve adicionar uma entrada em `self.events`.
+4. Escreva testes unitários cobrindo:
+   - Voo completo pelo caminho feliz de `IDLE` a `LANDED`.
+   - Tentativas de transição ilegais.
+   - Cada transição de estado individual.
+   - Múltiplas atualizações de sensor que não acionam uma transição.
 
 ---
 
-## Submission
+## Bônus
 
-1. Create a branch: `feat/int-challenge-02-<your-github-username>`.
-2. Place your solution at: `activities/submissions/<your-github-username>/int_challenge_02/`.
-3. Include a `README.md` in your submission folder explaining your state machine design.
-4. Open a pull request and request your mentor as reviewer.
+- Adicione um método `disarm()` que transita `ARMED → IDLE` (cenário de aborto).
+- Adicione um método `reset()` que retorna a FSM para `IDLE` a partir de qualquer estado (recuperação segura após anomalia).
+- Persista o log de eventos em um arquivo JSON.
+
+---
+
+## Submissão
+
+1. Crie um branch: `feat/int-challenge-02-<your-github-username>`.
+2. Coloque sua solução em: `activities/submissions/<your-github-username>/int_challenge_02/`.
+3. Inclua um `README.md` na pasta da sua submissão explicando o design da sua máquina de estados.
+4. Abra um pull request e solicite seu mentor como revisor.

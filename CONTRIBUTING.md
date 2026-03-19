@@ -1,139 +1,139 @@
-# Contributing to Tau Rocket Team Repositories
+# Contribuindo com os Repositórios da Tau Rocket Team
 
-Thank you for contributing! This guide explains how to contribute to any `dev.*` repository in the Tau Rocket Team organization.
-
----
-
-## Table of Contents
-
-1. [Code of Conduct](#1-code-of-conduct)
-2. [Before You Start](#2-before-you-start)
-3. [How to Report a Bug](#3-how-to-report-a-bug)
-4. [How to Request a Feature](#4-how-to-request-a-feature)
-5. [How to Submit a Pull Request](#5-how-to-submit-a-pull-request)
-6. [Development Workflow](#6-development-workflow)
-7. [Commit Message Guidelines](#7-commit-message-guidelines)
-8. [Code Style](#8-code-style)
-9. [Getting Help](#9-getting-help)
+Obrigado por contribuir! Este guia explica como contribuir com qualquer repositório `dev.*` na organização Tau Rocket Team.
 
 ---
 
-## 1. Code of Conduct
+## Índice
 
-We are committed to a welcoming, respectful, and inclusive environment.
-
-- Be kind and respectful in all interactions.
-- Critique the code, never the person.
-- Accept feedback gracefully — we are all here to learn.
-- Ask questions freely; no question is too basic.
-
-Violations should be reported to the team lead.
-
----
-
-## 2. Before You Start
-
-1. **Complete onboarding** — Read [`docs/onboarding.md`](docs/onboarding.md) if you have not already.
-2. **Read the guidelines** — Understand [`docs/guidelines.md`](docs/guidelines.md) before writing any code.
-3. **Check existing issues** — Your idea may already be tracked. Search before opening a duplicate.
-4. **Discuss large changes first** — For significant features or architecture changes, open an issue to discuss before writing code. This saves everyone time.
+1. [Código de Conduta](#1-código-de-conduta)
+2. [Antes de Começar](#2-antes-de-começar)
+3. [Como Reportar um Bug](#3-como-reportar-um-bug)
+4. [Como Solicitar uma Funcionalidade](#4-como-solicitar-uma-funcionalidade)
+5. [Como Enviar um Pull Request](#5-como-enviar-um-pull-request)
+6. [Fluxo de Desenvolvimento](#6-fluxo-de-desenvolvimento)
+7. [Diretrizes de Mensagem de Commit](#7-diretrizes-de-mensagem-de-commit)
+8. [Estilo de Código](#8-estilo-de-código)
+9. [Obtendo Ajuda](#9-obtendo-ajuda)
 
 ---
 
-## 3. How to Report a Bug
+## 1. Código de Conduta
 
-1. Search [existing issues](../../issues) to check if it has been reported already.
-2. If not, open a new issue using the [issue template](templates/issue_template.md).
-3. Include:
-   - A clear title describing the bug.
-   - Steps to reproduce.
-   - What you expected vs. what happened.
-   - Your environment (OS, language version, branch).
-   - Any relevant logs or error output.
+Estamos comprometidos com um ambiente acolhedor, respeitoso e inclusivo.
 
----
+- Seja gentil e respeitoso em todas as interações.
+- Critique o código, nunca a pessoa.
+- Aceite feedback com graciosidade — estamos todos aqui para aprender.
+- Faça perguntas livremente; nenhuma pergunta é básica demais.
 
-## 4. How to Request a Feature
-
-1. Open an issue using the [issue template](templates/issue_template.md) and select "Feature request".
-2. Describe the problem your feature solves.
-3. Explain your proposed solution.
-4. Wait for discussion and a team member to approve the idea before building it.
+Violações devem ser reportadas ao líder do time.
 
 ---
 
-## 5. How to Submit a Pull Request
+## 2. Antes de Começar
 
-### Quick Reference
+1. **Complete a integração** — Leia [`docs/onboarding.md`](docs/onboarding.md) se ainda não o fez.
+2. **Leia as diretrizes** — Entenda [`docs/guidelines.md`](docs/guidelines.md) antes de escrever qualquer código.
+3. **Verifique as issues existentes** — Sua ideia pode já estar registrada. Pesquise antes de abrir uma duplicata.
+4. **Discuta grandes mudanças primeiro** — Para funcionalidades significativas ou mudanças de arquitetura, abra uma issue para discussão antes de escrever código. Isso economiza o tempo de todos.
+
+---
+
+## 3. Como Reportar um Bug
+
+1. Pesquise nas [issues existentes](../../issues) para verificar se já foi reportado.
+2. Se não, abra uma nova issue usando o [template de issue](templates/issue_template.md).
+3. Inclua:
+   - Um título claro descrevendo o bug.
+   - Passos para reproduzir.
+   - O que você esperava vs. o que aconteceu.
+   - Seu ambiente (SO, versão da linguagem, branch).
+   - Quaisquer logs ou saídas de erro relevantes.
+
+---
+
+## 4. Como Solicitar uma Funcionalidade
+
+1. Abra uma issue usando o [template de issue](templates/issue_template.md) e selecione "Solicitação de funcionalidade".
+2. Descreva o problema que sua funcionalidade resolve.
+3. Explique sua solução proposta.
+4. Aguarde a discussão e a aprovação de um membro do time antes de implementar.
+
+---
+
+## 5. Como Enviar um Pull Request
+
+### Referência Rápida
 
 ```bash
-# 1. Update your local main
+# 1. Atualize seu main local
 git checkout main
 git pull origin main
 
-# 2. Create a feature branch
+# 2. Crie um branch de funcionalidade
 git checkout -b feat/my-feature
 
-# 3. Make your changes
-# ... edit files ...
+# 3. Faça suas alterações
+# ... edite os arquivos ...
 
-# 4. Stage and commit
+# 4. Adicione ao stage e faça commit
 git add .
 git commit -m "feat(scope): describe the change"
 
-# 5. Push and open PR
+# 5. Faça push e abra o PR
 git push origin feat/my-feature
-# → Open PR on GitHub and use the pull_request_template.md
+# → Abra o PR no GitHub e use o pull_request_template.md
 ```
 
-### Pull Request Requirements
+### Requisitos do Pull Request
 
-- Link the issue your PR addresses (`Closes #42`).
-- Fill in the PR template completely.
-- All CI checks must be green before requesting review.
-- At least **one approval** from a team member before merging.
-- Keep PRs small and focused — one purpose per PR.
+- Vincule a issue que seu PR resolve (`Closes #42`).
+- Preencha o template de PR completamente.
+- Todas as verificações de CI devem estar verdes antes de solicitar revisão.
+- Pelo menos **uma aprovação** de um membro do time antes de fazer merge.
+- Mantenha os PRs pequenos e focados — um objetivo por PR.
 
 ---
 
-## 6. Development Workflow
+## 6. Fluxo de Desenvolvimento
 
-We follow **GitHub Flow**:
-
-```
-main  ←── PR (reviewed + CI green) ←── feature branch
-```
-
-1. **Never commit directly to `main`.**
-2. Always branch from the latest `main`.
-3. Delete your branch after the PR is merged.
-
-### Branch Naming
+Seguimos o **GitHub Flow**:
 
 ```
-feat/short-description       # New features
-fix/short-description        # Bug fixes
-docs/short-description       # Documentation
-refactor/short-description   # Refactoring
-test/short-description       # Tests
+main  ←── PR (revisado + CI verde) ←── branch de funcionalidade
+```
+
+1. **Nunca faça commit diretamente no `main`.**
+2. Sempre crie branches a partir do `main` mais recente.
+3. Exclua seu branch após o merge do PR.
+
+### Nomenclatura de Branches
+
+```
+feat/short-description       # Novas funcionalidades
+fix/short-description        # Correções de bugs
+docs/short-description       # Documentação
+refactor/short-description   # Refatoração
+test/short-description       # Testes
 chore/short-description      # Build/CI/deps
 ```
 
 ---
 
-## 7. Commit Message Guidelines
+## 7. Diretrizes de Mensagem de Commit
 
-We follow [Conventional Commits](https://www.conventionalcommits.org/):
+Seguimos o [Conventional Commits](https://www.conventionalcommits.org/):
 
 ```
 <type>(<scope>): <subject>
 
-[optional body — what and why, not how]
+[corpo opcional — o quê e por quê, não como]
 
-[optional footer — Closes #42]
+[rodapé opcional — Closes #42]
 ```
 
-**Examples:**
+**Exemplos:**
 
 ```
 feat(parser): add support for GPS NMEA sentences
@@ -144,21 +144,21 @@ test(parser): add edge case tests for CRC validation
 
 ---
 
-## 8. Code Style
+## 8. Estilo de Código
 
-- **Python**: [Ruff](https://docs.astral.sh/ruff/) for linting and formatting. Run `ruff check .` and `ruff format .` before committing.
-- **C/C++**: [clang-format](https://clang.llvm.org/docs/ClangFormat.html) with the project `.clang-format` file. Run before committing.
-- **Markdown**: Consistent headers, code blocks, and tables. Wrap long lines.
+- **Python**: [Ruff](https://docs.astral.sh/ruff/) para linting e formatação. Execute `ruff check .` e `ruff format .` antes de fazer commit.
+- **C/C++**: [clang-format](https://clang.llvm.org/docs/ClangFormat.html) com o arquivo `.clang-format` do projeto. Execute antes de fazer commit.
+- **Markdown**: Cabeçalhos, blocos de código e tabelas consistentes. Quebre linhas longas.
 
-All projects include a linting step in CI that will fail the build if style issues are found.
+Todos os projetos incluem uma etapa de linting no CI que falhará o build se problemas de estilo forem encontrados.
 
 ---
 
-## 9. Getting Help
+## 9. Obtendo Ajuda
 
-- **GitHub Issues** — For bugs and feature requests.
-- **GitHub Discussions** — For questions and general team conversation.
-- **Direct message** — Reach out to your mentor or a senior developer.
-- **PR comments** — Tag a reviewer if you need guidance mid-PR.
+- **GitHub Issues** — Para bugs e solicitações de funcionalidades.
+- **GitHub Discussions** — Para perguntas e conversa geral do time.
+- **Mensagem direta** — Entre em contato com seu mentor ou um desenvolvedor sênior.
+- **Comentários de PR** — Marque um revisor se precisar de orientação durante o PR.
 
-We want you to succeed — don't hesitate to ask for help!
+Queremos que você tenha sucesso — não hesite em pedir ajuda!
