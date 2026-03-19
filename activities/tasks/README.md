@@ -1,44 +1,44 @@
-# Training Tasks
+# Tarefas de Treinamento
 
-This directory contains assigned training tasks. Tasks differ from challenges in that they are assigned to specific developers by mentors and are tied to real project work.
-
----
-
-## How Tasks Are Assigned
-
-1. Your mentor creates a GitHub Issue using the issue template and labels it `training-task`.
-2. The issue is assigned to you.
-3. Your mentor will link to a specific task file here (or create one) with detailed instructions.
-4. Complete the task on a dedicated branch and submit a pull request.
+Este diretório contém as tarefas de treinamento atribuídas. As tarefas diferem dos desafios porque são atribuídas a desenvolvedores específicos pelos mentores e estão vinculadas a trabalhos reais de projeto.
 
 ---
 
-## Current Tasks
+## Como as Tarefas São Atribuídas
 
-> Tasks will be added here as they are assigned. Check the [GitHub Issues](../../../../issues?label=training-task) page for your current assignments.
+1. Seu mentor cria uma GitHub Issue usando o template de issue e a rotula com `training-task`.
+2. A issue é atribuída a você.
+3. Seu mentor vinculará a um arquivo de tarefa específico aqui (ou criará um) com instruções detalhadas.
+4. Conclua a tarefa em um branch dedicado e envie um pull request.
 
 ---
 
-## Task Template
+## Tarefas Atuais
 
-When a mentor creates a new task file, it should follow this structure:
+> As tarefas serão adicionadas aqui conforme forem atribuídas. Verifique a página de [GitHub Issues](../../../../issues?label=training-task) para suas atribuições atuais.
+
+---
+
+## Template de Tarefa
+
+Quando um mentor criar um novo arquivo de tarefa, ele deve seguir esta estrutura:
 
 ```markdown
-# Task <ID> — <Title>
+# Tarefa <ID> — <Título>
 
-**Assigned to:** @github-username
-**Due date:** YYYY-MM-DD
-**Related issue:** #<issue-number>
+**Atribuído a:** @github-username
+**Prazo:** AAAA-MM-DD
+**Issue relacionada:** #<número-da-issue>
 
-## Objective
+## Objetivo
 
 ...
 
-## Acceptance Criteria
+## Critérios de Aceitação
 
 - [ ] ...
 
-## Resources
+## Recursos
 
 - ...
 ```

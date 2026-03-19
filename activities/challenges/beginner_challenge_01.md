@@ -1,28 +1,28 @@
-# Beginner Challenge 01 — FizzBuzz with a Twist
+# Desafio Iniciante 01 — FizzBuzz com um Toque
 
-**Difficulty:** Beginner  
-**Estimated time:** 20–30 minutes  
-**Skills practiced:** Loops, conditionals, functions, clean code
-
----
-
-## Background
-
-FizzBuzz is a classic programming exercise. This version extends the original to make it more interesting and to practice writing clean, well-structured code.
+**Dificuldade:** Iniciante  
+**Tempo estimado:** 20–30 minutos  
+**Habilidades praticadas:** Loops, condicionais, funções, código limpo
 
 ---
 
-## Problem Statement
+## Contexto
 
-Write a function `fizzbuzz(n)` that takes a positive integer `n` and returns a **list of strings** for all numbers from 1 to `n` (inclusive), following these rules:
+FizzBuzz é um exercício de programação clássico. Esta versão estende o original para torná-lo mais interessante e praticar a escrita de código limpo e bem estruturado.
 
-- If the number is divisible by **3**, return `"Fizz"`.
-- If the number is divisible by **5**, return `"Buzz"`.
-- If the number is divisible by **both 3 and 5**, return `"FizzBuzz"`.
-- If the number is divisible by **7**, **append** `"Rocket"` to whatever the result is so far (e.g., `"Rocket"`, `"FizzRocket"`, `"BuzzRocket"`, `"FizzBuzzRocket"`).
-- Otherwise, return the number as a string.
+---
 
-### Example
+## Enunciado do Problema
+
+Escreva uma função `fizzbuzz(n)` que receba um inteiro positivo `n` e retorne uma **lista de strings** para todos os números de 1 a `n` (inclusive), seguindo estas regras:
+
+- Se o número for divisível por **3**, retorne `"Fizz"`.
+- Se o número for divisível por **5**, retorne `"Buzz"`.
+- Se o número for divisível por **3 e 5**, retorne `"FizzBuzz"`.
+- Se o número for divisível por **7**, **acrescente** `"Rocket"` ao resultado obtido até agora (ex.: `"Rocket"`, `"FizzRocket"`, `"BuzzRocket"`, `"FizzBuzzRocket"`).
+- Caso contrário, retorne o número como string.
+
+### Exemplo
 
 ```
 fizzbuzz(20) → [
@@ -34,33 +34,33 @@ fizzbuzz(20) → [
 
 ---
 
-## Requirements
+## Requisitos
 
-1. Implement `fizzbuzz(n: int) -> list[str]` in Python (or the language of your choice).
-2. The function must handle edge cases:
-   - `n = 0` → return an empty list.
-   - Negative `n` → raise a `ValueError` with a descriptive message.
-3. Write at least **5 unit tests** covering different scenarios.
-4. Your code must be properly formatted and linted before submission.
+1. Implemente `fizzbuzz(n: int) -> list[str]` em Python (ou na linguagem de sua escolha).
+2. A função deve tratar casos extremos:
+   - `n = 0` → retorne uma lista vazia.
+   - `n` negativo → lance um `ValueError` com uma mensagem descritiva.
+3. Escreva pelo menos **5 testes unitários** cobrindo diferentes cenários.
+4. Seu código deve estar devidamente formatado e com lint antes da submissão.
 
 ---
 
-## Bonus
+## Bônus
 
-- Accept an optional `rules` parameter that is a list of `(divisor, label)` tuples, making the function fully configurable. The standard FizzBuzz rules should be the default.
+- Aceite um parâmetro opcional `rules` que é uma lista de tuplas `(divisor, label)`, tornando a função totalmente configurável. As regras padrão do FizzBuzz devem ser o padrão.
 
 ```python
-# Example usage with custom rules
+# Exemplo de uso com regras customizadas
 fizzbuzz(15, rules=[(3, "Fizz"), (5, "Buzz"), (7, "Rocket")])
 ```
 
 ---
 
-## Submission
+## Submissão
 
-1. Create a branch: `feat/challenge-01-<your-github-username>`.
-2. Place your solution at: `activities/submissions/<your-github-username>/challenge_01/solution.py`.
-3. Place your tests at: `activities/submissions/<your-github-username>/challenge_01/test_solution.py`.
-4. Open a pull request and request your mentor as reviewer.
+1. Crie um branch: `feat/challenge-01-<your-github-username>`.
+2. Coloque sua solução em: `activities/submissions/<your-github-username>/challenge_01/solution.py`.
+3. Coloque seus testes em: `activities/submissions/<your-github-username>/challenge_01/test_solution.py`.
+4. Abra um pull request e solicite seu mentor como revisor.
 
-See [`activities/submissions/README.md`](../submissions/README.md) for full submission instructions.
+Veja [`activities/submissions/README.md`](../submissions/README.md) para instruções completas de submissão.

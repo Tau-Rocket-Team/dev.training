@@ -1,72 +1,72 @@
-# Developer Progress Tracker
+# Acompanhamento de Progresso dos Desenvolvedores
 
-This file tracks each developer's training progress. Mentors update this after milestone reviews.
-
----
-
-## How to Use This File
-
-- Each developer has their own section below.
-- Mentors check off items as the developer completes and demonstrates them.
-- Developers should not edit their own section — progress is verified by a mentor.
-- Add a new developer section by copying the [template](#developer-template) below.
+Este arquivo acompanha o progresso de treinamento de cada desenvolvedor. Os mentores atualizam após revisões de marcos.
 
 ---
 
-## Developer Template
+## Como Usar Este Arquivo
 
-Copy and paste this section when a new developer joins:
+- Cada desenvolvedor tem sua própria seção abaixo.
+- Os mentores marcam os itens conforme o desenvolvedor os completa e demonstra.
+- Os desenvolvedores não devem editar sua própria seção — o progresso é verificado por um mentor.
+- Adicione uma nova seção de desenvolvedor copiando o [template](#template-de-desenvolvedor) abaixo.
+
+---
+
+## Template de Desenvolvedor
+
+Copie e cole esta seção quando um novo desenvolvedor ingressar:
 
 ```markdown
-### @github-username — Full Name
+### @github-username — Nome Completo
 
-**Start date:** YYYY-MM-DD  
-**Sub-team:** (avionics / software / simulation / other)  
+**Data de início:** AAAA-MM-DD  
+**Sub-time:** (aviônica / software / simulação / outro)  
 **Mentor:** @mentor-github-username  
 
-#### Onboarding
-- [ ] GitHub access granted
-- [ ] Dev environment set up
-- [ ] SSH configured
-- [ ] `dev.training` cloned and read
-- [ ] Introduction issue opened
-- [ ] First 1-on-1 with mentor completed
+#### Integração
+- [ ] Acesso ao GitHub concedido
+- [ ] Ambiente de desenvolvimento configurado
+- [ ] SSH configurado
+- [ ] `dev.training` clonado e lido
+- [ ] Issue de apresentação aberta
+- [ ] Primeiro encontro individual com mentor realizado
 
-#### Documentation
-- [ ] `docs/onboarding.md` read
-- [ ] `docs/guidelines.md` read
-- [ ] `docs/architecture.md` read
-- [ ] `docs/tools.md` read and tools installed
+#### Documentação
+- [ ] `docs/onboarding.md` lido
+- [ ] `docs/guidelines.md` lido
+- [ ] `docs/architecture.md` lido
+- [ ] `docs/tools.md` lido e ferramentas instaladas
 
-#### Activities
-- [ ] Beginner Challenge 01 submitted
-- [ ] Beginner Challenge 01 reviewed and approved
-- [ ] Beginner Challenge 02 submitted
-- [ ] Beginner Challenge 02 reviewed and approved
-- [ ] Intermediate Challenge 01 submitted
-- [ ] Intermediate Challenge 01 reviewed and approved
-- [ ] Intermediate Challenge 02 submitted
-- [ ] Intermediate Challenge 02 reviewed and approved
+#### Atividades
+- [ ] Desafio Iniciante 01 enviado
+- [ ] Desafio Iniciante 01 revisado e aprovado
+- [ ] Desafio Iniciante 02 enviado
+- [ ] Desafio Iniciante 02 revisado e aprovado
+- [ ] Desafio Intermediário 01 enviado
+- [ ] Desafio Intermediário 01 revisado e aprovado
+- [ ] Desafio Intermediário 02 enviado
+- [ ] Desafio Intermediário 02 revisado e aprovado
 
-#### Project Contributions
-- [ ] First PR opened on a `dev.*` project
-- [ ] First PR merged
-- [ ] First code review given to another developer
+#### Contribuições no Projeto
+- [ ] Primeiro PR aberto em um projeto `dev.*`
+- [ ] Primeiro PR integrado
+- [ ] Primeira revisão de código dada a outro desenvolvedor
 
-#### Notes
-<!-- Mentor notes on progress, strengths, areas for improvement -->
+#### Observações
+<!-- Notas do mentor sobre progresso, pontos fortes, áreas de melhoria -->
 ```
 
 ---
 
-## Active Developers
+## Desenvolvedores Ativos
 
-<!-- Add developer sections below as they join -->
+<!-- Adicione seções de desenvolvedores abaixo conforme ingressam -->
 
-> No developers tracked yet. Add the first section when onboarding begins.
+> Nenhum desenvolvedor acompanhado ainda. Adicione a primeira seção quando a integração começar.
 
 ---
 
-## Completed / Graduated Developers
+## Desenvolvedores Concluídos / Formados
 
-<!-- Move developers here once they have completed the full training programme -->
+<!-- Mova os desenvolvedores para cá após completarem o programa completo de treinamento -->

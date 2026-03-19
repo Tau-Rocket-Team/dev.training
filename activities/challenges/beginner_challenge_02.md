@@ -1,24 +1,24 @@
-# Beginner Challenge 02 — Temperature Converter
+# Desafio Iniciante 02 — Conversor de Temperatura
 
-**Difficulty:** Beginner  
-**Estimated time:** 30–45 minutes  
-**Skills practiced:** Functions, dictionaries, input validation, error handling
-
----
-
-## Background
-
-Temperature conversions are a common real-world task. Rockets deal with extreme temperatures, so accurate conversion between units is genuinely important in aerospace software.
+**Dificuldade:** Iniciante  
+**Tempo estimado:** 30–45 minutos  
+**Habilidades praticadas:** Funções, dicionários, validação de entrada, tratamento de erros
 
 ---
 
-## Problem Statement
+## Contexto
 
-Create a `TemperatureConverter` class that can convert between **Celsius (C)**, **Fahrenheit (F)**, and **Kelvin (K)**.
+Conversões de temperatura são uma tarefa comum no mundo real. Foguetes lidam com temperaturas extremas, portanto a conversão precisa entre unidades é genuinamente importante no software aeroespacial.
 
-### Conversion Formulas
+---
 
-| From → To | Formula |
+## Enunciado do Problema
+
+Crie uma classe `TemperatureConverter` que possa converter entre **Celsius (C)**, **Fahrenheit (F)** e **Kelvin (K)**.
+
+### Fórmulas de Conversão
+
+| De → Para | Fórmula |
 |---|---|
 | C → F | `F = (C × 9/5) + 32` |
 | C → K | `K = C + 273.15` |
@@ -27,7 +27,7 @@ Create a `TemperatureConverter` class that can convert between **Celsius (C)**, 
 | K → C | `C = K − 273.15` |
 | K → F | `F = (K − 273.15) × 9/5 + 32` |
 
-### Class Interface
+### Interface da Classe
 
 ```python
 class TemperatureConverter:
@@ -49,7 +49,7 @@ class TemperatureConverter:
         """
 ```
 
-### Example Usage
+### Exemplo de Uso
 
 ```python
 conv = TemperatureConverter()
@@ -58,30 +58,30 @@ conv.convert(100, "C", "F")   # → 212.0
 conv.convert(32, "F", "C")    # → 0.0
 conv.convert(0, "C", "K")     # → 273.15
 conv.convert(0, "K", "C")     # → -273.15
-conv.convert(-300, "C", "K")  # → raises ValueError (below absolute zero)
+conv.convert(-300, "C", "K")  # → lança ValueError (abaixo do zero absoluto)
 ```
 
 ---
 
-## Requirements
+## Requisitos
 
-1. Implement the `TemperatureConverter` class.
-2. Validate inputs — raise `ValueError` with a meaningful message for invalid units or physically impossible temperatures (below 0 K).
-3. Write at least **8 unit tests** including edge cases (absolute zero, same unit conversion, invalid input).
-4. Do **not** use any external libraries — standard Python only.
-
----
-
-## Bonus
-
-- Add a `convert_batch(values, from_unit, to_unit)` method that accepts a list and returns a list of converted values.
-- Add a command-line interface so the script can be run as: `python solution.py 100 C F`.
+1. Implemente a classe `TemperatureConverter`.
+2. Valide as entradas — lance `ValueError` com uma mensagem significativa para unidades inválidas ou temperaturas fisicamente impossíveis (abaixo de 0 K).
+3. Escreva pelo menos **8 testes unitários** incluindo casos extremos (zero absoluto, conversão para a mesma unidade, entrada inválida).
+4. **Não** use nenhuma biblioteca externa — apenas Python padrão.
 
 ---
 
-## Submission
+## Bônus
 
-1. Create a branch: `feat/challenge-02-<your-github-username>`.
-2. Place your solution at: `activities/submissions/<your-github-username>/challenge_02/solution.py`.
-3. Place your tests at: `activities/submissions/<your-github-username>/challenge_02/test_solution.py`.
-4. Open a pull request and request your mentor as reviewer.
+- Adicione um método `convert_batch(values, from_unit, to_unit)` que aceite uma lista e retorne uma lista de valores convertidos.
+- Adicione uma interface de linha de comando para que o script possa ser executado como: `python solution.py 100 C F`.
+
+---
+
+## Submissão
+
+1. Crie um branch: `feat/challenge-02-<your-github-username>`.
+2. Coloque sua solução em: `activities/submissions/<your-github-username>/challenge_02/solution.py`.
+3. Coloque seus testes em: `activities/submissions/<your-github-username>/challenge_02/test_solution.py`.
+4. Abra um pull request e solicite seu mentor como revisor.

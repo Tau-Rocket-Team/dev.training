@@ -1,67 +1,67 @@
 # dev.training
 
-> The central hub for onboarding, training, standards, and activity tracking for the Tau Rocket Team development team.
+> O hub central de integração, treinamento, padrões e acompanhamento de atividades para o time de desenvolvimento da Tau Rocket Team.
 
 ---
 
-## Purpose
+## Objetivo
 
-This repository helps new and existing developers get up to speed quickly, follow consistent practices, and track their progress over time. It contains:
+Este repositório ajuda desenvolvedores novos e experientes a se atualizarem rapidamente, seguirem práticas consistentes e acompanharem seu progresso ao longo do tempo. Ele contém:
 
-- **Documentation** — onboarding guides, coding standards, architecture overviews, and tool setup instructions.
-- **Activities** — coding challenges, assigned tasks, and a submission area for completed work.
-- **Templates** — reusable templates for pull requests, issues, and new `dev.*` projects.
-- **Tracking** — developer progress logs and mentor feedback records.
-
----
-
-## How Developers Should Use This Repository
-
-1. **Start with onboarding** — Read [`docs/onboarding.md`](docs/onboarding.md) first. It walks you through environment setup, team conventions, and your first contribution.
-2. **Learn the guidelines** — Study [`docs/guidelines.md`](docs/guidelines.md) before writing any code. It covers branching strategy, commit messages, naming conventions, and code quality standards.
-3. **Understand the architecture** — Review [`docs/architecture.md`](docs/architecture.md) to understand how team projects are structured and how they communicate.
-4. **Set up your tools** — Follow [`docs/tools.md`](docs/tools.md) to install and configure every tool the team uses.
-5. **Complete activities** — Work through challenges and tasks in the [`activities/`](activities/) directory and submit your work in [`activities/submissions/`](activities/submissions/).
-6. **Track your progress** — Your mentor will log your progress in [`tracking/progress.md`](tracking/progress.md) and leave feedback in [`tracking/feedback.md`](tracking/feedback.md).
-7. **Contribute** — Read [`CONTRIBUTING.md`](CONTRIBUTING.md) before opening pull requests or issues.
+- **Documentação** — guias de integração, padrões de código, visões gerais de arquitetura e instruções de configuração de ferramentas.
+- **Atividades** — desafios de programação, tarefas atribuídas e uma área de envio de trabalhos concluídos.
+- **Templates** — modelos reutilizáveis para pull requests, issues e novos projetos `dev.*`.
+- **Acompanhamento** — registros de progresso dos desenvolvedores e feedbacks dos mentores.
 
 ---
 
-## How Projects Are Organized
+## Como os Desenvolvedores Devem Usar Este Repositório
 
-All team repositories follow the **`dev.<projectName>`** naming pattern. Examples:
+1. **Comece com a integração** — Leia [`docs/onboarding.md`](docs/onboarding.md) primeiro. Ele orienta você na configuração do ambiente, convenções do time e sua primeira contribuição.
+2. **Aprenda as diretrizes** — Estude [`docs/guidelines.md`](docs/guidelines.md) antes de escrever qualquer código. Cobre estratégia de branches, mensagens de commit, convenções de nomenclatura e padrões de qualidade de código.
+3. **Entenda a arquitetura** — Revise [`docs/architecture.md`](docs/architecture.md) para entender como os projetos do time são estruturados e como se comunicam.
+4. **Configure suas ferramentas** — Siga [`docs/tools.md`](docs/tools.md) para instalar e configurar todas as ferramentas usadas pelo time.
+5. **Complete as atividades** — Realize os desafios e tarefas no diretório [`activities/`](activities/) e envie seu trabalho em [`activities/submissions/`](activities/submissions/).
+6. **Acompanhe seu progresso** — Seu mentor registrará seu progresso em [`tracking/progress.md`](tracking/progress.md) e deixará feedback em [`tracking/feedback.md`](tracking/feedback.md).
+7. **Contribua** — Leia [`CONTRIBUTING.md`](CONTRIBUTING.md) antes de abrir pull requests ou issues.
 
-| Repository | Description |
+---
+
+## Como os Projetos São Organizados
+
+Todos os repositórios do time seguem o padrão de nomenclatura **`dev.<projectName>`**. Exemplos:
+
+| Repositório | Descrição |
 |---|---|
-| `dev.training` | This repository — onboarding and team standards |
-| `dev.avionics` | Flight computer firmware and avionics software |
-| `dev.groundstation` | Ground station telemetry and control software |
-| `dev.simulation` | Rocket flight simulation tools |
+| `dev.training` | Este repositório — integração e padrões do time |
+| `dev.avionics` | Firmware do computador de voo e software de aviônica |
+| `dev.groundstation` | Software de telemetria e controle da estação terrestre |
+| `dev.simulation` | Ferramentas de simulação de voo de foguete |
 
-Every `dev.*` project should use the [`templates/project_template.md`](templates/project_template.md) as its starting README to keep structure consistent across all repositories.
+Todo projeto `dev.*` deve usar o [`templates/project_template.md`](templates/project_template.md) como README inicial para manter a estrutura consistente em todos os repositórios.
 
 ---
 
-## Quick Navigation
+## Navegação Rápida
 
-| Path | Purpose |
+| Caminho | Objetivo |
 |---|---|
-| [`docs/onboarding.md`](docs/onboarding.md) | New developer setup guide |
-| [`docs/guidelines.md`](docs/guidelines.md) | Coding standards and git workflow |
-| [`docs/architecture.md`](docs/architecture.md) | System architecture and patterns |
-| [`docs/tools.md`](docs/tools.md) | Recommended tools and setup |
-| [`activities/challenges/`](activities/challenges/) | Coding challenges (beginner → intermediate) |
-| [`activities/tasks/`](activities/tasks/) | Assigned training tasks |
-| [`activities/submissions/`](activities/submissions/) | Submit your completed work here |
-| [`templates/`](templates/) | PR, issue, and project templates |
-| [`tracking/progress.md`](tracking/progress.md) | Developer progress tracker |
-| [`tracking/feedback.md`](tracking/feedback.md) | Mentor feedback and evaluations |
-| [`CONTRIBUTING.md`](CONTRIBUTING.md) | How to contribute to team repositories |
+| [`docs/onboarding.md`](docs/onboarding.md) | Guia de configuração para novos desenvolvedores |
+| [`docs/guidelines.md`](docs/guidelines.md) | Padrões de código e fluxo git |
+| [`docs/architecture.md`](docs/architecture.md) | Arquitetura do sistema e padrões |
+| [`docs/tools.md`](docs/tools.md) | Ferramentas recomendadas e configuração |
+| [`activities/challenges/`](activities/challenges/) | Desafios de programação (iniciante → intermediário) |
+| [`activities/tasks/`](activities/tasks/) | Tarefas de treinamento atribuídas |
+| [`activities/submissions/`](activities/submissions/) | Envie seu trabalho concluído aqui |
+| [`templates/`](templates/) | Templates de PR, issue e projeto |
+| [`tracking/progress.md`](tracking/progress.md) | Acompanhamento de progresso dos desenvolvedores |
+| [`tracking/feedback.md`](tracking/feedback.md) | Feedback e avaliações dos mentores |
+| [`CONTRIBUTING.md`](CONTRIBUTING.md) | Como contribuir com os repositórios do time |
 
 ---
 
-## Getting Help
+## Obtendo Ajuda
 
-- Open a GitHub Issue using the [`templates/issue_template.md`](templates/issue_template.md) template.
-- Tag your mentor or a senior developer in your pull request for review.
-- Check the [discussions tab](../../discussions) for team Q&A.
+- Abra uma GitHub Issue usando o template [`templates/issue_template.md`](templates/issue_template.md).
+- Marque seu mentor ou um desenvolvedor sênior no seu pull request para revisão.
+- Confira a [aba de discussões](../../discussions) para perguntas e respostas do time.

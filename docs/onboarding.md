@@ -1,54 +1,54 @@
-# Onboarding Guide
+# Guia de Integração
 
-Welcome to the Tau Rocket Team development team! This guide walks you through everything you need to do before writing your first line of code.
-
----
-
-## Table of Contents
-
-1. [Prerequisites](#1-prerequisites)
-2. [Request Access](#2-request-access)
-3. [Set Up Your Development Environment](#3-set-up-your-development-environment)
-4. [Clone the Repositories You Need](#4-clone-the-repositories-you-need)
-5. [Understand the Team Workflow](#5-understand-the-team-workflow)
-6. [Complete Your First Activity](#6-complete-your-first-activity)
-7. [Introduce Yourself](#7-introduce-yourself)
-8. [Onboarding Checklist](#8-onboarding-checklist)
+Bem-vindo ao time de desenvolvimento da Tau Rocket Team! Este guia orienta você em tudo o que precisa fazer antes de escrever sua primeira linha de código.
 
 ---
 
-## 1. Prerequisites
+## Índice
 
-Before your first day, make sure you have:
-
-- A GitHub account (send your username to your mentor so you can be added to the organization).
-- Basic familiarity with the command line / terminal.
-- A computer running macOS, Linux, or Windows with WSL2.
-
-If you are missing any of the above, ask your mentor for help before proceeding.
-
----
-
-## 2. Request Access
-
-1. Send your GitHub username to your mentor or the team lead.
-2. Accept the invitation to join the **Tau-Rocket-Team** GitHub organization.
-3. Confirm you can see the team's private repositories at `https://github.com/Tau-Rocket-Team`.
+1. [Pré-requisitos](#1-pré-requisitos)
+2. [Solicitar Acesso](#2-solicitar-acesso)
+3. [Configurar Seu Ambiente de Desenvolvimento](#3-configurar-seu-ambiente-de-desenvolvimento)
+4. [Clonar os Repositórios Necessários](#4-clonar-os-repositórios-necessários)
+5. [Entender o Fluxo de Trabalho do Time](#5-entender-o-fluxo-de-trabalho-do-time)
+6. [Completar Sua Primeira Atividade](#6-completar-sua-primeira-atividade)
+7. [Apresentar-se](#7-apresentar-se)
+8. [Checklist de Integração](#8-checklist-de-integração)
 
 ---
 
-## 3. Set Up Your Development Environment
+## 1. Pré-requisitos
 
-Follow [`docs/tools.md`](tools.md) for a complete list of required tools and step-by-step installation instructions. At minimum you will need:
+Antes do seu primeiro dia, certifique-se de ter:
 
-| Tool | Minimum Version | Purpose |
+- Uma conta no GitHub (envie seu nome de usuário ao seu mentor para ser adicionado à organização).
+- Familiaridade básica com a linha de comando / terminal.
+- Um computador rodando macOS, Linux ou Windows com WSL2.
+
+Se faltar algum dos itens acima, peça ajuda ao seu mentor antes de prosseguir.
+
+---
+
+## 2. Solicitar Acesso
+
+1. Envie seu nome de usuário do GitHub ao seu mentor ou ao líder do time.
+2. Aceite o convite para ingressar na organização **Tau-Rocket-Team** no GitHub.
+3. Confirme que você consegue ver os repositórios privados do time em `https://github.com/Tau-Rocket-Team`.
+
+---
+
+## 3. Configurar Seu Ambiente de Desenvolvimento
+
+Siga [`docs/tools.md`](tools.md) para uma lista completa das ferramentas necessárias e instruções de instalação passo a passo. No mínimo você precisará de:
+
+| Ferramenta | Versão Mínima | Finalidade |
 |---|---|---|
-| Git | 2.40+ | Version control |
-| VS Code | Latest stable | Primary editor |
-| Python | 3.11+ | Scripting and tooling |
-| Docker | 24.0+ | Containerised development |
+| Git | 2.40+ | Controle de versão |
+| VS Code | Última versão estável | Editor principal |
+| Python | 3.11+ | Scripts e ferramentas |
+| Docker | 24.0+ | Desenvolvimento em contêiner |
 
-### Configure Git
+### Configurar o Git
 
 ```bash
 git config --global user.name "Your Name"
@@ -57,87 +57,87 @@ git config --global core.editor "code --wait"
 git config --global init.defaultBranch main
 ```
 
-### Set Up SSH Authentication
+### Configurar Autenticação SSH
 
-Using SSH instead of HTTPS is **strongly recommended**:
+Usar SSH em vez de HTTPS é **fortemente recomendado**:
 
 ```bash
-# Generate a new SSH key
+# Gere uma nova chave SSH
 ssh-keygen -t ed25519 -C "your.email@example.com"
 
-# Add your key to the SSH agent
+# Adicione sua chave ao agente SSH
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_ed25519
 
-# Copy your public key and add it to GitHub
+# Copie sua chave pública e adicione-a ao GitHub
 cat ~/.ssh/id_ed25519.pub
-# → Paste this at https://github.com/settings/keys
+# → Cole em https://github.com/settings/keys
 ```
 
 ---
 
-## 4. Clone the Repositories You Need
+## 4. Clonar os Repositórios Necessários
 
-Always clone via SSH:
+Sempre clone via SSH:
 
 ```bash
-# Clone this training repository
+# Clone este repositório de treinamento
 git clone git@github.com:Tau-Rocket-Team/dev.training.git
 cd dev.training
 
-# Clone the project repository assigned to you (example)
+# Clone o repositório do projeto atribuído a você (exemplo)
 git clone git@github.com:Tau-Rocket-Team/dev.avionics.git
 ```
 
 ---
 
-## 5. Understand the Team Workflow
+## 5. Entender o Fluxo de Trabalho do Time
 
-Read [`docs/guidelines.md`](guidelines.md) in full before writing any code. Key points:
+Leia [`docs/guidelines.md`](guidelines.md) na íntegra antes de escrever qualquer código. Pontos principais:
 
-- **Branch from `main`** — never commit directly to `main`.
-- **Naming convention** — branches follow `type/short-description` (e.g., `feat/sensor-calibration`, `fix/telemetry-overflow`).
-- **Commit messages** — follow the [Conventional Commits](https://www.conventionalcommits.org/) format.
-- **Pull requests** — every change goes through a PR and requires at least one reviewer approval before merging.
-- **Code review** — be respectful, specific, and constructive.
-
----
-
-## 6. Complete Your First Activity
-
-1. Navigate to [`activities/challenges/`](../activities/challenges/).
-2. Start with `beginner_challenge_01.md`.
-3. Create a branch: `git checkout -b feat/onboarding-<your-github-username>`.
-4. Complete the challenge and place your solution in [`activities/submissions/`](../activities/submissions/) following the naming convention described there.
-5. Open a pull request against `main` using the [`templates/pull_request_template.md`](../templates/pull_request_template.md) template.
-6. Request your mentor as a reviewer.
+- **Crie branches a partir do `main`** — nunca faça commit diretamente no `main`.
+- **Convenção de nomenclatura** — branches seguem `type/short-description` (ex.: `feat/sensor-calibration`, `fix/telemetry-overflow`).
+- **Mensagens de commit** — siga o formato [Conventional Commits](https://www.conventionalcommits.org/).
+- **Pull requests** — toda mudança passa por um PR e requer pelo menos uma aprovação de revisor antes do merge.
+- **Code review** — seja respeitoso, específico e construtivo.
 
 ---
 
-## 7. Introduce Yourself
+## 6. Completar Sua Primeira Atividade
 
-Open a GitHub Issue titled **"👋 Introduction — \<Your Name\>"** using the issue template and tell the team:
-
-- Your background and why you joined the team.
-- Which sub-team you are on (avionics, software, simulation, etc.).
-- What you are most excited to work on.
-
----
-
-## 8. Onboarding Checklist
-
-Use this checklist to track your onboarding progress. Copy it into a comment on your introduction issue.
-
-- [ ] GitHub account created and access granted
-- [ ] Git configured with name, email, and SSH key
-- [ ] Required tools installed (see `docs/tools.md`)
-- [ ] `dev.training` repository cloned
-- [ ] `docs/guidelines.md` read in full
-- [ ] `docs/architecture.md` read in full
-- [ ] First challenge completed and PR submitted
-- [ ] Introduction issue opened
-- [ ] Met with mentor for first 1-on-1 session
+1. Navegue até [`activities/challenges/`](../activities/challenges/).
+2. Comece com `beginner_challenge_01.md`.
+3. Crie um branch: `git checkout -b feat/onboarding-<seu-github-username>`.
+4. Complete o desafio e coloque sua solução em [`activities/submissions/`](../activities/submissions/) seguindo a convenção de nomenclatura descrita lá.
+5. Abra um pull request contra `main` usando o template [`templates/pull_request_template.md`](../templates/pull_request_template.md).
+6. Solicite seu mentor como revisor.
 
 ---
 
-> **Need help?** Open a GitHub Issue or ping your mentor directly. No question is too small.
+## 7. Apresentar-se
+
+Abra uma GitHub Issue com o título **"👋 Apresentação — \<Seu Nome\>"** usando o template de issue e conte ao time:
+
+- Seu histórico e por que ingressou no time.
+- Em qual sub-time você está (aviônica, software, simulação, etc.).
+- No que você está mais animado para trabalhar.
+
+---
+
+## 8. Checklist de Integração
+
+Use este checklist para acompanhar seu progresso de integração. Copie-o para um comentário na sua issue de apresentação.
+
+- [ ] Conta do GitHub criada e acesso concedido
+- [ ] Git configurado com nome, e-mail e chave SSH
+- [ ] Ferramentas necessárias instaladas (veja `docs/tools.md`)
+- [ ] Repositório `dev.training` clonado
+- [ ] `docs/guidelines.md` lido na íntegra
+- [ ] `docs/architecture.md` lido na íntegra
+- [ ] Primeiro desafio concluído e PR enviado
+- [ ] Issue de apresentação aberta
+- [ ] Primeiro encontro individual com mentor realizado
+
+---
+
+> **Precisa de ajuda?** Abra uma GitHub Issue ou fale diretamente com seu mentor. Nenhuma pergunta é pequena demais.

@@ -1,28 +1,28 @@
-# Recommended Tools and Setup
+# Ferramentas Recomendadas e Configuração
 
-This document lists every tool used by the development team, why it is used, and how to install and configure it.
+Este documento lista todas as ferramentas utilizadas pelo time de desenvolvimento, por que são usadas e como instalá-las e configurá-las.
 
 ---
 
-## Table of Contents
+## Índice
 
-1. [Core Tools](#1-core-tools)
+1. [Ferramentas Essenciais](#1-ferramentas-essenciais)
 2. [Editor — VS Code](#2-editor--vs-code)
-3. [Version Control — Git](#3-version-control--git)
-4. [Python Environment](#4-python-environment)
-5. [C / C++ Toolchain](#5-c--c-toolchain)
-6. [Containerisation — Docker](#6-containerisation--docker)
-7. [Communication](#7-communication)
-8. [Optional but Recommended](#8-optional-but-recommended)
+3. [Controle de Versão — Git](#3-controle-de-versão--git)
+4. [Ambiente Python](#4-ambiente-python)
+5. [Toolchain C / C++](#5-toolchain-c--c)
+6. [Conteinerização — Docker](#6-conteinerização--docker)
+7. [Comunicação](#7-comunicação)
+8. [Opcional, mas Recomendado](#8-opcional-mas-recomendado)
 
 ---
 
-## 1. Core Tools
+## 1. Ferramentas Essenciais
 
-| Tool | Version | Installation |
+| Ferramenta | Versão | Instalação |
 |---|---|---|
 | Git | 2.40+ | [git-scm.com](https://git-scm.com/downloads) |
-| VS Code | Latest stable | [code.visualstudio.com](https://code.visualstudio.com/) |
+| VS Code | Última estável | [code.visualstudio.com](https://code.visualstudio.com/) |
 | Python | 3.11+ | [python.org](https://www.python.org/downloads/) |
 | Docker Desktop | 24.0+ | [docker.com](https://www.docker.com/products/docker-desktop/) |
 
@@ -30,15 +30,15 @@ This document lists every tool used by the development team, why it is used, and
 
 ## 2. Editor — VS Code
 
-VS Code is the team's primary editor. Using a consistent editor makes pair programming and screen sharing much easier.
+O VS Code é o editor principal do time. Usar um editor consistente torna a programação em par e o compartilhamento de tela muito mais fáceis.
 
-### Installation
+### Instalação
 
-Download from [code.visualstudio.com](https://code.visualstudio.com/) and follow the installer for your OS.
+Baixe em [code.visualstudio.com](https://code.visualstudio.com/) e siga o instalador para o seu SO.
 
-### Required Extensions
+### Extensões Obrigatórias
 
-Install these from the Extensions panel (`Ctrl+Shift+X` / `Cmd+Shift+X`) or via the CLI:
+Instale pelo painel de Extensões (`Ctrl+Shift+X` / `Cmd+Shift+X`) ou via CLI:
 
 ```bash
 code --install-extension ms-python.python
@@ -51,9 +51,9 @@ code --install-extension yzhang.markdown-all-in-one
 code --install-extension streetsidesoftware.code-spell-checker
 ```
 
-### Recommended Settings
+### Configurações Recomendadas
 
-Add the following to your VS Code `settings.json` (`Ctrl+,` → open JSON):
+Adicione o seguinte ao `settings.json` do VS Code (`Ctrl+,` → abrir JSON):
 
 ```json
 {
@@ -75,15 +75,15 @@ Add the following to your VS Code `settings.json` (`Ctrl+,` → open JSON):
 
 ---
 
-## 3. Version Control — Git
+## 3. Controle de Versão — Git
 
-### Installation
+### Instalação
 
-- **macOS**: `brew install git` or via Xcode Command Line Tools (`xcode-select --install`)
+- **macOS**: `brew install git` ou via Xcode Command Line Tools (`xcode-select --install`)
 - **Ubuntu/Debian**: `sudo apt update && sudo apt install git`
-- **Windows**: Download the installer from [git-scm.com](https://git-scm.com/downloads) (includes Git Bash)
+- **Windows**: Baixe o instalador em [git-scm.com](https://git-scm.com/downloads) (inclui o Git Bash)
 
-### Initial Configuration
+### Configuração Inicial
 
 ```bash
 git config --global user.name "Your Name"
@@ -93,97 +93,97 @@ git config --global init.defaultBranch main
 git config --global pull.rebase false
 ```
 
-### SSH Key Setup
+### Configuração de Chave SSH
 
 ```bash
-# Generate a new Ed25519 key
+# Gere uma nova chave Ed25519
 ssh-keygen -t ed25519 -C "your.email@example.com"
 
-# Start the agent and add the key
+# Inicie o agente e adicione a chave
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_ed25519
 
-# Print the public key — copy and paste it into GitHub Settings → SSH Keys
+# Exiba a chave pública — copie e cole em GitHub Settings → SSH Keys
 cat ~/.ssh/id_ed25519.pub
 
-# Verify the connection
+# Verifique a conexão
 ssh -T git@github.com
 ```
 
 ---
 
-## 4. Python Environment
+## 4. Ambiente Python
 
-We use **virtual environments** to isolate project dependencies. Never install project packages into the global Python environment.
+Usamos **ambientes virtuais** para isolar dependências de projeto. Nunca instale pacotes de projeto no ambiente Python global.
 
-### Installation
+### Instalação
 
 - **macOS**: `brew install python@3.11`
 - **Ubuntu/Debian**: `sudo apt install python3.11 python3.11-venv python3-pip`
-- **Windows**: Download from [python.org](https://www.python.org/downloads/)
+- **Windows**: Baixe em [python.org](https://www.python.org/downloads/)
 
-### Creating a Virtual Environment
+### Criando um Ambiente Virtual
 
 ```bash
-# Inside a project directory
+# Dentro do diretório do projeto
 python3 -m venv .venv
 
-# Activate (macOS / Linux)
+# Ativar (macOS / Linux)
 source .venv/bin/activate
 
-# Activate (Windows)
+# Ativar (Windows)
 .venv\Scripts\activate
 
-# Install project dependencies
+# Instalar dependências do projeto
 pip install -r requirements.txt
 
-# Deactivate when done
+# Desativar ao terminar
 deactivate
 ```
 
-### Linting and Formatting
+### Lint e Formatação
 
-We use **Ruff** for both linting and formatting (it replaces flake8, isort, and black):
+Usamos **Ruff** tanto para lint quanto para formatação (substitui flake8, isort e black):
 
 ```bash
 pip install ruff
 
-# Check for issues
+# Verificar problemas
 ruff check .
 
-# Auto-fix issues
+# Corrigir problemas automaticamente
 ruff check --fix .
 
-# Format code
+# Formatar código
 ruff format .
 ```
 
-### Testing
+### Testes
 
 ```bash
 pip install pytest pytest-cov
 
-# Run all tests
+# Executar todos os testes
 pytest
 
-# Run with coverage report
+# Executar com relatório de cobertura
 pytest --cov=src --cov-report=term-missing
 ```
 
 ---
 
-## 5. C / C++ Toolchain
+## 5. Toolchain C / C++
 
-Used primarily for `dev.avionics` (flight computer firmware).
+Usado principalmente para `dev.avionics` (firmware do computador de voo).
 
-### Installation
+### Instalação
 
 **macOS:**
 ```bash
-# Install LLVM/Clang
+# Instalar LLVM/Clang
 brew install llvm cmake ninja
 
-# Install ARM cross-compiler (for embedded targets)
+# Instalar cross-compilador ARM (para alvos embarcados)
 brew install --cask gcc-arm-embedded
 ```
 
@@ -191,92 +191,92 @@ brew install --cask gcc-arm-embedded
 ```bash
 sudo apt update
 sudo apt install build-essential cmake ninja-build clang clang-format clang-tidy
-# ARM cross-compiler
+# Cross-compilador ARM
 sudo apt install gcc-arm-none-eabi
 ```
 
-### Build System — CMake
+### Sistema de Build — CMake
 
 ```bash
-# Configure and build
+# Configurar e compilar
 cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug
 cmake --build build
 
-# Run tests
+# Executar testes
 ctest --test-dir build --output-on-failure
 ```
 
-### Code Formatting — clang-format
+### Formatação de Código — clang-format
 
-A `.clang-format` file in each project root defines the style. Run before committing:
+Um arquivo `.clang-format` na raiz de cada projeto define o estilo. Execute antes de fazer commit:
 
 ```bash
-# Format all C/C++ files
+# Formatar todos os arquivos C/C++
 find src -name "*.cpp" -o -name "*.hpp" -o -name "*.c" -o -name "*.h" \
   | xargs clang-format -i
 ```
 
 ---
 
-## 6. Containerisation — Docker
+## 6. Conteinerização — Docker
 
-Docker is used to provide reproducible development and build environments.
+O Docker é usado para fornecer ambientes de desenvolvimento e build reproduzíveis.
 
-### Installation
+### Instalação
 
-Download **Docker Desktop** from [docker.com](https://www.docker.com/products/docker-desktop/) and follow the installer.
+Baixe o **Docker Desktop** em [docker.com](https://www.docker.com/products/docker-desktop/) e siga o instalador.
 
-Verify the installation:
+Verifique a instalação:
 ```bash
 docker --version
 docker compose version
 ```
 
-### Common Commands
+### Comandos Comuns
 
 ```bash
-# Build an image
+# Compilar uma imagem
 docker build -t tau/groundstation:dev .
 
-# Run a container interactively
+# Executar um contêiner interativamente
 docker run -it --rm tau/groundstation:dev bash
 
-# Start services defined in docker-compose.yml
+# Iniciar serviços definidos em docker-compose.yml
 docker compose up -d
 
-# Stop services
+# Parar serviços
 docker compose down
 
-# View logs
+# Ver logs
 docker compose logs -f
 ```
 
 ---
 
-## 7. Communication
+## 7. Comunicação
 
-| Tool | Purpose | Access |
+| Ferramenta | Finalidade | Acesso |
 |---|---|---|
-| GitHub Issues | Bug reports, feature requests, task tracking | Included in GitHub |
-| GitHub Discussions | Team Q&A, announcements | Included in GitHub |
-| GitHub Projects | Sprint planning and backlog | Included in GitHub |
-| Email / Team chat | Real-time coordination | Ask your mentor |
+| GitHub Issues | Relatórios de bugs, solicitações de funcionalidades, acompanhamento de tarefas | Incluído no GitHub |
+| GitHub Discussions | Perguntas do time, anúncios | Incluído no GitHub |
+| GitHub Projects | Planejamento de sprint e backlog | Incluído no GitHub |
+| E-mail / Chat do time | Coordenação em tempo real | Pergunte ao seu mentor |
 
 ---
 
-## 8. Optional but Recommended
+## 8. Opcional, mas Recomendado
 
-| Tool | Purpose | Installation |
+| Ferramenta | Finalidade | Instalação |
 |---|---|---|
-| [GitHub CLI (`gh`)](https://cli.github.com/) | Create PRs and issues from the terminal | `brew install gh` / `apt install gh` |
-| [pre-commit](https://pre-commit.com/) | Auto-run linters before every commit | `pip install pre-commit && pre-commit install` |
-| [htop](https://htop.dev/) | Process monitor | `brew install htop` / `apt install htop` |
-| [jq](https://stedolan.github.io/jq/) | JSON processing in shell scripts | `brew install jq` / `apt install jq` |
-| [bat](https://github.com/sharkdp/bat) | Better `cat` with syntax highlighting | `brew install bat` / `apt install bat` |
+| [GitHub CLI (`gh`)](https://cli.github.com/) | Criar PRs e issues pelo terminal | `brew install gh` / `apt install gh` |
+| [pre-commit](https://pre-commit.com/) | Executar linters automaticamente antes de cada commit | `pip install pre-commit && pre-commit install` |
+| [htop](https://htop.dev/) | Monitor de processos | `brew install htop` / `apt install htop` |
+| [jq](https://stedolan.github.io/jq/) | Processamento de JSON em scripts shell | `brew install jq` / `apt install jq` |
+| [bat](https://github.com/sharkdp/bat) | `cat` aprimorado com realce de sintaxe | `brew install bat` / `apt install bat` |
 
-### Setting Up pre-commit
+### Configurando o pre-commit
 
-Add a `.pre-commit-config.yaml` to your project:
+Adicione um `.pre-commit-config.yaml` ao seu projeto:
 
 ```yaml
 repos:
@@ -295,7 +295,7 @@ repos:
       - id: check-merge-conflict
 ```
 
-Install and activate:
+Instale e ative:
 ```bash
 pip install pre-commit
 pre-commit install
