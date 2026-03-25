@@ -21,7 +21,6 @@ Copie e cole esta seção quando um novo desenvolvedor ingressar:
 ### @github-username — Nome Completo
 
 **Data de início:** AAAA-MM-DD  
-**Sub-time:** (aviônica / software / simulação / outro)  
 **Mentor:** @mentor-github-username  
 
 #### Integração

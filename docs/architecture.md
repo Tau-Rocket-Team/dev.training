@@ -6,209 +6,123 @@ Este documento descreve os padrões de arquitetura geral utilizados nos projetos
 
 ## Índice
 
-1. [Visão Geral](#1-visão-geral)
-2. [Ecossistema de Repositórios](#2-ecossistema-de-repositórios)
-3. [Padrão de Arquitetura em Camadas](#3-padrão-de-arquitetura-em-camadas)
-4. [Fluxo de Dados](#4-fluxo-de-dados)
-5. [Padrões de Comunicação](#5-padrões-de-comunicação)
-6. [Estratégia de Tratamento de Erros](#6-estratégia-de-tratamento-de-erros)
-7. [Arquitetura de Testes](#7-arquitetura-de-testes)
-8. [Implantação e CI/CD](#8-implantação-e-cicd)
+- [Arquitetura do Sistema](#arquitetura-do-sistema)
+  - [Índice](#índice)
+- [Arquitetura do Sistema](#arquitetura-do-sistema-1)
+  - [1. Visão Geral](#1-visão-geral)
+  - [2. Ecossistema de Repositórios](#2-ecossistema-de-repositórios)
+    - [Direção das Dependências](#direção-das-dependências)
+  - [3. Padrão de Arquitetura em Camadas](#3-padrão-de-arquitetura-em-camadas)
+  - [4. Fluxo de Dados Padronizado](#4-fluxo-de-dados-padronizado)
+  - [5. Padrões de Comunicação](#5-padrões-de-comunicação)
+    - [APIs e Protocolos](#apis-e-protocolos)
+  - [6. Estratégia de Tratamento de Erros](#6-estratégia-de-tratamento-de-erros)
+  - [7. Arquitetura de Testes](#7-arquitetura-de-testes)
+  - [8. Automação e CI/CD](#8-automação-e-cicd)
+
+---
+
+# Arquitetura do Sistema
+
+Este documento descreve os padrões de arquitetura geral utilizados nos projetos de software. Entender esses padrões ajuda você a contribuir com qualquer repositório com o mínimo de tempo de adaptação.
 
 ---
 
 ## 1. Visão Geral
 
-A pilha de software do time suporta o ciclo de vida completo de um lançamento de foguete:
-
-```
-┌─────────────────────────────────────────────────────────┐
-│                     Estação Terrestre                    │
-│   dev.groundstation  ←──telemetria──→  dev.simulation   │
-└──────────────────────────┬──────────────────────────────┘
-                           │ USB / RF
-                           ▼
-┌─────────────────────────────────────────────────────────┐
-│                    Computador de Voo                     │
-│              dev.avionics  (embedded C/C++)              │
-└─────────────────────────────────────────────────────────┘
-```
-
-Cada camada tem uma responsabilidade clara e se comunica com as outras por meio de interfaces bem definidas (protocolos seriais, APIs REST ou formatos de arquivo compartilhados).
+Os softwares seguem uma arquitetura **modular e orientada a camadas** para garantir que sejam fáceis de entender, manter e escalar. Cada projeto é organizado em torno de um conjunto de responsabilidades claramente definidas, com interfaces padronizadas entre os módulos.
 
 ---
 
 ## 2. Ecossistema de Repositórios
 
-| Repositório | Linguagem(ns) | Responsabilidade |
-|---|---|---|
-| `dev.training` | Markdown | Integração e padrões do time |
-| `dev.avionics` | C / C++ | Firmware do computador de voo |
-| `dev.groundstation` | Python | Ingestão, exibição e registro de telemetria |
-| `dev.simulation` | Python | Simulação de trajetória e ambiente pré-voo |
+A colaboração entre projetos baseia-se em uma hierarquia de dependências clara:
+
+| Categoria | Responsabilidade |
+| :--- | :--- |
+| **Core / Protocols** | Definições de tipos, contratos e protocolos compartilhados. |
+| **Engines / Services** | Lógica de processamento, serviços de backend e motores de cálculo. |
+| **Clients / Interfaces** | Dashboards, GUIs e ferramentas de interação com o usuário. |
+| **Tooling** | Scripts de automação, documentação e infraestrutura de CI/CD. |
 
 ### Direção das Dependências
 
-```
-dev.avionics  ──(sem deps)──  firmware embarcado standalone
-dev.groundstation  ──lê──  telemetria do dev.avionics
-dev.simulation  ──valida──  parâmetros usados no dev.avionics
-```
-
-Nenhum repositório deve criar dependências circulares. Se estruturas de dados compartilhadas forem necessárias, defina-as em um documento de especificação compartilhado ou em um repositório `dev.protocols` separado.
+1. **Dependência Linear:** Repositórios de aplicação dependem de bibliotecas core, mas bibliotecas core nunca dependem de aplicações.
+2. **Zero Dependência Circular:** Se dois módulos precisam compartilhar dados, a estrutura deve ser movida para um nível inferior na hierarquia ou para um pacote de protocolos comum.
 
 ---
 
 ## 3. Padrão de Arquitetura em Camadas
 
-Cada projeto segue uma **arquitetura em camadas** para separar responsabilidades:
+Cada projeto segue uma separação de responsabilidades em quatro níveis:
 
-```
+```text
 ┌──────────────────┐
-│   Apresentação   │  CLI, GUI, saída serial
+│   Apresentação   │  Interfaces (CLI, GUI, API Exposta)
 ├──────────────────┤
-│   Aplicação      │  Lógica de negócio, máquinas de estado
+│   Aplicação      │  Orquestração, Casos de Uso, Máquinas de Estado
 ├──────────────────┤
-│     Domínio      │  Estruturas de dados e algoritmos centrais
+│     Domínio      │  Regras de negócio, Modelos de dados, Algoritmos
 ├──────────────────┤
-│  Infraestrutura  │  Drivers de hardware, E/S, sistema de arquivos, rede
+│  Infraestrutura  │  Persistência, Drivers, Comunicação externa, OS
 └──────────────────┘
 ```
 
-**Regras:**
-- Camadas superiores podem depender de camadas inferiores, mas nunca o contrário.
-- A camada de domínio não tem **dependências externas** — é lógica pura.
-- A camada de infraestrutura é o único lugar para interagir com hardware ou o SO.
-
-### Exemplo (firmware de aviônica)
-
-```
-src/
-├── presentation/    # Formatação de saída serial
-├── application/     # Máquina de estado de voo (IDLE → ARMED → POWERED → COAST → ...)
-├── domain/          # Cálculos físicos, fusão de sensores
-└── infrastructure/  # Drivers SPI/I2C, armazenamento flash, UART
-```
+**Regras de Ouro:**
+* **Isolamento do Domínio:** A camada de Domínio não deve ter dependências externas. Ela deve ser composta de código puro da linguagem escolhida.
+* **Injeção de Dependência:** Camadas superiores utilizam as inferiores através de interfaces.
+* **Sentido Único:** O fluxo de conhecimento sempre aponta para baixo.
 
 ---
 
-## 4. Fluxo de Dados
+## 4. Fluxo de Dados Padronizado
 
-### Pipeline de Telemetria
+Independentemente da aplicação, os dados seguem um ciclo de vida previsível:
 
-```
-Sensor (IMU/Baro/GPS)
-    │
-    ▼ bytes brutos
-Driver (camada de infraestrutura)
-    │
-    ▼ leitura estruturada
-Fusão de Sensores (camada de domínio)
-    │
-    ▼ vetor de estado fundido
-Máquina de Estado de Voo (camada de aplicação)
-    │
-    ▼ pacote de telemetria
-Codificador Serial (camada de apresentação)
-    │
-    ▼ UART / RF
-Estação Terrestre
-```
-
-### Pipeline da Estação Terrestre
-
-```
-Entrada serial / RF
-    │
-    ▼
-Parser de Pacotes  ──erro──▶  Logger de Erros
-    │
-    ▼ frame analisado
-Armazenamento de Telemetria (memória + arquivo)
-    │
-    ├──▶  Dashboard em Tempo Real (GUI)
-    └──▶  Logger de Dados (CSV / SQLite)
-```
+1. **Ingestão:** Captura de dados brutos (sensores, entrada de usuário, rede).
+2. **Normalização/Parsing:** Transformação de bytes ou strings em estruturas de dados tipadas.
+3. **Processamento:** Aplicação da lógica de domínio sobre os dados estruturados.
+4. **Saída/Ação:** Persistência em disco, exibição visual ou transmissão para outros sistemas.
 
 ---
 
 ## 5. Padrões de Comunicação
 
-### Protocolo de Telemetria Serial
-
-Os pacotes têm um cabeçalho de comprimento fixo seguido de um payload variável:
-
-```
-┌──────┬──────────┬────────┬───────────────┬──────┐
-│ 0xAA │ MSG_TYPE │ LENGTH │    PAYLOAD    │ CRC8 │
-│  1B  │    1B    │   2B   │  0–255 bytes  │  1B  │
-└──────┴──────────┴────────┴───────────────┴──────┘
-```
-
-- `0xAA` — byte de sincronização, sempre presente.
-- `MSG_TYPE` — identifica o esquema do payload.
-- `LENGTH` — comprimento do payload em bytes (little-endian).
-- `CRC8` — checksum sobre `MSG_TYPE + LENGTH + PAYLOAD`.
-
-### API REST (Estação Terrestre ↔ Simulação)
-
-Onde aplicável, os serviços expõem uma API REST simples. Sempre versione a API:
-
-```
-GET  /api/v1/telemetry/latest
-GET  /api/v1/telemetry/history?since=<timestamp>
-POST /api/v1/simulation/run
-```
+### APIs e Protocolos
+* **Interno:** Onde a performance é crítica, utiliza-se protocolos binários com cabeçalho de sincronização e Checksum (CRC).
+* **Externo:** Serviços expõem interfaces **RESTful** ou **WebSockets**.
+* **Versionamento:** Toda interface de comunicação deve ser versionada no caminho (ex: `/api/v1/...`).
 
 ---
 
 ## 6. Estratégia de Tratamento de Erros
 
-- **Embarcado (C/C++)**: Retorne códigos de erro; nunca use exceções em contexto de ISR. Use `assert()` apenas em builds de debug.
-- **Python**: Use exceções tipadas. Defina uma hierarquia de exceções específica do projeto que estende os tipos embutidos.
-- **Nunca engula erros silenciosamente** — no mínimo, registre-os.
-- **Falhe rapidamente** em caminhos de código não críticos; **degrade graciosamente** em caminhos críticos (ex.: recorra aos dados do último sensor válido conhecido antes de desabilitar um canal completamente).
+* **Tipagem de Erros:** Utilize exceções ou códigos de erro tipados específicos do projeto.
+* **Falha Segura (Fail-fast):** Erros de configuração ou validação devem interromper a execução no início.
+* **Degradação Graciosa:** Em sistemas de tempo real, se um módulo falhar, o sistema deve tentar operar em modo reduzido em vez de travar completamente.
+* **Logging:** Todo erro deve ser registrado com contexto suficiente (Timestamp, Módulo, Severidade) para depuração.
 
 ---
 
 ## 7. Arquitetura de Testes
 
-```
-tests/
-├── unit/         # Teste funções / classes individuais em isolamento
-├── integration/  # Teste interações entre módulos
-└── e2e/          # Testes de cenário end-to-end (ex.: pipeline completo de telemetria)
-```
+A validação é dividida em níveis de granularidade:
 
-| Tipo de Teste | Velocidade | Escopo | Executar no CI |
-|---|---|---|---|
-| Unitário | Rápido (< 1s cada) | Única função/classe | Sempre |
-| Integração | Médio (< 10s cada) | Fronteira do módulo | Sempre |
-| E2E | Lento (minutos) | Sistema completo | Ao fazer merge no `main` |
-
-Todos os testes devem passar antes que um PR possa ser integrado.
+| Nível | Objetivo | Execução |
+| :--- | :--- | :--- |
+| **Unitário** | Valida funções e classes isoladas. | Automática (CI) |
+| **Integração** | Valida a comunicação entre dois ou mais módulos. | Automática (CI) |
+| **End-to-End (E2E)** | Valida o fluxo completo do usuário/sistema. | Pull Requests p/ Main |
 
 ---
 
-## 8. Implantação e CI/CD
+## 8. Automação e CI/CD
 
-Todo repositório `dev.*` deve incluir um diretório `.github/workflows/` com no mínimo:
+Todo repositório deve ser "plug-and-play" para automação via GitHub Actions ou ferramentas similares:
 
-- **`ci.yml`** — executado a cada push e PR: lint, build e testes unitários.
-- **`release.yml`** — acionado em tags `v*`: cria artefatos de release e uma GitHub Release.
+* **Lint/Format:** Verificação estática de estilo antes do build.
+* **Build:** Geração de artefatos (binários, pacotes npm, imagens Docker).
+* **Test:** Execução da suite de testes obrigatória.
+* **Release:** Geração automática de Tags e Changelogs baseada em commits semânticos.
 
-### Pipeline Típico de CI
-
-```
-push / PR aberto
-      │
-      ▼
-┌─────────────┐     ┌──────────┐     ┌─────────────┐
-│    Lint     │────▶│  Build   │────▶│    Test     │
-│ (ruff/clang)│     │(cmake/py)│     │(pytest/gtest)│
-└─────────────┘     └──────────┘     └─────────────┘
-                                           │
-                                     ✅ Tudo passou?
-                                           │
-                                     PR pode ser integrado
-```
+---

@@ -6,15 +6,20 @@ Obrigado por contribuir! Este guia explica como contribuir com qualquer reposit�
 
 ## Índice
 
-1. [Código de Conduta](#1-código-de-conduta)
-2. [Antes de Começar](#2-antes-de-começar)
-3. [Como Reportar um Bug](#3-como-reportar-um-bug)
-4. [Como Solicitar uma Funcionalidade](#4-como-solicitar-uma-funcionalidade)
-5. [Como Enviar um Pull Request](#5-como-enviar-um-pull-request)
-6. [Fluxo de Desenvolvimento](#6-fluxo-de-desenvolvimento)
-7. [Diretrizes de Mensagem de Commit](#7-diretrizes-de-mensagem-de-commit)
-8. [Estilo de Código](#8-estilo-de-código)
-9. [Obtendo Ajuda](#9-obtendo-ajuda)
+- [Contribuindo com os Repositórios da Tau Rocket Team](#contribuindo-com-os-repositórios-da-tau-rocket-team)
+  - [Índice](#índice)
+  - [1. Código de Conduta](#1-código-de-conduta)
+  - [2. Antes de Começar](#2-antes-de-começar)
+  - [3. Como Reportar um Bug](#3-como-reportar-um-bug)
+  - [4. Como Solicitar uma Funcionalidade](#4-como-solicitar-uma-funcionalidade)
+  - [5. Como Enviar um Pull Request](#5-como-enviar-um-pull-request)
+    - [Referência Rápida](#referência-rápida)
+    - [Requisitos do Pull Request](#requisitos-do-pull-request)
+  - [6. Fluxo de Desenvolvimento](#6-fluxo-de-desenvolvimento)
+    - [Nomenclatura de Branches](#nomenclatura-de-branches)
+  - [7. Diretrizes de Mensagem de Commit](#7-diretrizes-de-mensagem-de-commit)
+  - [8. Estilo de Código](#8-estilo-de-código)
+  - [9. Obtendo Ajuda](#9-obtendo-ajuda)
 
 ---
 
@@ -101,11 +106,11 @@ git push origin feat/my-feature
 Seguimos o **GitHub Flow**:
 
 ```
-main  ←── PR (revisado + CI verde) ←── branch de funcionalidade
+main  ←── dev ←── PR (revisado + CI verde) ←── branch de funcionalidade
 ```
 
 1. **Nunca faça commit diretamente no `main`.**
-2. Sempre crie branches a partir do `main` mais recente.
+2. Sempre crie branches a partir do `dev` mais recente.
 3. Exclua seu branch após o merge do PR.
 
 ### Nomenclatura de Branches
@@ -146,8 +151,7 @@ test(parser): add edge case tests for CRC validation
 
 ## 8. Estilo de Código
 
-- **Python**: [Ruff](https://docs.astral.sh/ruff/) para linting e formatação. Execute `ruff check .` e `ruff format .` antes de fazer commit.
-- **C/C++**: [clang-format](https://clang.llvm.org/docs/ClangFormat.html) com o arquivo `.clang-format` do projeto. Execute antes de fazer commit.
+- **JavaScript**: [ESLint](https://eslint.org/) para linting e [Prettier](https://prettier.io/) para formatação. Execute `npx eslint .` e `npx medical prettier --write .` antes de fazer commit.
 - **Markdown**: Cabeçalhos, blocos de código e tabelas consistentes. Quebre linhas longas.
 
 Todos os projetos incluem uma etapa de linting no CI que falhará o build se problemas de estilo forem encontrados.
@@ -157,7 +161,6 @@ Todos os projetos incluem uma etapa de linting no CI que falhará o build se pro
 ## 9. Obtendo Ajuda
 
 - **GitHub Issues** — Para bugs e solicitações de funcionalidades.
-- **GitHub Discussions** — Para perguntas e conversa geral do time.
 - **Mensagem direta** — Entre em contato com seu mentor ou um desenvolvedor sênior.
 - **Comentários de PR** — Marque um revisor se precisar de orientação durante o PR.
 

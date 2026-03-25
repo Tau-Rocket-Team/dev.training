@@ -11,7 +11,7 @@ about: Use este template para todas as novas issues
 - [ ] ✨ Solicitação de funcionalidade
 - [ ] 📚 Melhoria de documentação
 - [ ] ❓ Pergunta / ajuda necessária
-- [ ] 🎓 Tarefa de treinamento (apenas mentores)
+- [ ] 🎓 Tarefa de treinamento (apenas mentores ou em apresentações)
 
 ---
 

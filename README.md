@@ -34,9 +34,8 @@ Todos os repositórios do time seguem o padrão de nomenclatura **`dev.<projectN
 | Repositório | Descrição |
 |---|---|
 | `dev.training` | Este repositório — integração e padrões do time |
-| `dev.avionics` | Firmware do computador de voo e software de aviônica |
-| `dev.groundstation` | Software de telemetria e controle da estação terrestre |
-| `dev.simulation` | Ferramentas de simulação de voo de foguete |
+| `dev.management` | Ferramentas de gerenciamento de projetos e documentação |
+| `dev.docs` | Documentação do projeto |
 
 Todo projeto `dev.*` deve usar o [`templates/project_template.md`](templates/project_template.md) como README inicial para manter a estrutura consistente em todos os repositórios.
 

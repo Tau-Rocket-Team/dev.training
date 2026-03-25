@@ -6,14 +6,18 @@ Bem-vindo ao time de desenvolvimento da Tau Rocket Team! Este guia orienta você
 
 ## Índice
 
-1. [Pré-requisitos](#1-pré-requisitos)
-2. [Solicitar Acesso](#2-solicitar-acesso)
-3. [Configurar Seu Ambiente de Desenvolvimento](#3-configurar-seu-ambiente-de-desenvolvimento)
-4. [Clonar os Repositórios Necessários](#4-clonar-os-repositórios-necessários)
-5. [Entender o Fluxo de Trabalho do Time](#5-entender-o-fluxo-de-trabalho-do-time)
-6. [Completar Sua Primeira Atividade](#6-completar-sua-primeira-atividade)
-7. [Apresentar-se](#7-apresentar-se)
-8. [Checklist de Integração](#8-checklist-de-integração)
+- [Guia de Integração](#guia-de-integração)
+  - [Índice](#índice)
+  - [1. Pré-requisitos](#1-pré-requisitos)
+  - [2. Solicitar Acesso](#2-solicitar-acesso)
+  - [3. Configurar Seu Ambiente de Desenvolvimento](#3-configurar-seu-ambiente-de-desenvolvimento)
+    - [Configurar o Git](#configurar-o-git)
+    - [Configurar Autenticação SSH](#configurar-autenticação-ssh)
+  - [4. Clonar os Repositórios Necessários](#4-clonar-os-repositórios-necessários)
+  - [5. Entender o Fluxo de Trabalho do Time](#5-entender-o-fluxo-de-trabalho-do-time)
+  - [6. Completar Sua Primeira Atividade](#6-completar-sua-primeira-atividade)
+  - [7. Apresentar-se](#7-apresentar-se)
+  - [8. Checklist de Integração](#8-checklist-de-integração)
 
 ---
 
@@ -82,11 +86,8 @@ Sempre clone via SSH:
 
 ```bash
 # Clone este repositório de treinamento
-git clone git@github.com:Tau-Rocket-Team/dev.training.git
+git clone https://github.com/Tau-Rocket-Team/dev.training.git
 cd dev.training
-
-# Clone o repositório do projeto atribuído a você (exemplo)
-git clone git@github.com:Tau-Rocket-Team/dev.avionics.git
 ```
 
 ---
@@ -95,7 +96,7 @@ git clone git@github.com:Tau-Rocket-Team/dev.avionics.git
 
 Leia [`docs/guidelines.md`](guidelines.md) na íntegra antes de escrever qualquer código. Pontos principais:
 
-- **Crie branches a partir do `main`** — nunca faça commit diretamente no `main`.
+- **Crie branches a partir do `dev`** — nunca faça commit diretamente no `main`.
 - **Convenção de nomenclatura** — branches seguem `type/short-description` (ex.: `feat/sensor-calibration`, `fix/telemetry-overflow`).
 - **Mensagens de commit** — siga o formato [Conventional Commits](https://www.conventionalcommits.org/).
 - **Pull requests** — toda mudança passa por um PR e requer pelo menos uma aprovação de revisor antes do merge.
@@ -119,7 +120,6 @@ Leia [`docs/guidelines.md`](guidelines.md) na íntegra antes de escrever qualque
 Abra uma GitHub Issue com o título **"👋 Apresentação — \<Seu Nome\>"** usando o template de issue e conte ao time:
 
 - Seu histórico e por que ingressou no time.
-- Em qual sub-time você está (aviônica, software, simulação, etc.).
 - No que você está mais animado para trabalhar.
 
 ---

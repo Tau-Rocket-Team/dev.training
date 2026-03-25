@@ -6,29 +6,40 @@ Este documento define os padrões que todo desenvolvedor do time deve seguir. Pr
 
 ## Índice
 
-1. [Fluxo de Trabalho Git](#1-fluxo-de-trabalho-git)
-2. [Estratégia de Branches](#2-estratégia-de-branches)
-3. [Mensagens de Commit](#3-mensagens-de-commit)
-4. [Pull Requests](#4-pull-requests)
-5. [Etiqueta de Code Review](#5-etiqueta-de-code-review)
-6. [Convenções de Nomenclatura](#6-convenções-de-nomenclatura)
-7. [Princípios de Código Limpo](#7-princípios-de-código-limpo)
-8. [Estrutura do Projeto](#8-estrutura-do-projeto)
-9. [Padrões de Documentação](#9-padrões-de-documentação)
+- [Diretrizes de Desenvolvimento](#diretrizes-de-desenvolvimento)
+  - [Índice](#índice)
+  - [1. Fluxo de Trabalho Git](#1-fluxo-de-trabalho-git)
+  - [2. Estratégia de Branches](#2-estratégia-de-branches)
+  - [3. Mensagens de Commit](#3-mensagens-de-commit)
+    - [Formato](#formato)
+    - [Regras](#regras)
+    - [Exemplos](#exemplos)
+  - [4. Pull Requests](#4-pull-requests)
+  - [5. Etiqueta de Code Review](#5-etiqueta-de-code-review)
+  - [6. Convenções de Nomenclatura](#6-convenções-de-nomenclatura)
+    - [Arquivos e Diretórios](#arquivos-e-diretórios)
+    - [Variáveis e Funções (Python)](#variáveis-e-funções-python)
+    - [Branches e Tags](#branches-e-tags)
+  - [7. Padrões de Documentação (JSDoc)](#7-padrões-de-documentação-jsdoc)
+    - [Por que usar JSDoc em vez de comentários simples?](#por-que-usar-jsdoc-em-vez-de-comentários-simples)
+  - [8. Princípios de Código Limpo](#8-princípios-de-código-limpo)
+    - [Exemplo: Antes vs. Depois](#exemplo-antes-vs-depois)
+  - [9. Estrutura do Projeto](#9-estrutura-do-projeto)
 
 ---
 
 ## 1. Fluxo de Trabalho Git
 
-Seguimos um **GitHub Flow** simplificado:
+Seguimos o seguinte **GitHub Flow**:
 
 ```
-main  ←── branch de funcionalidade (PR + revisão) ←── seu branch local
+main  ←── dev ←── branch de funcionalidade (PR + revisão) ←── seu branch local
 ```
 
 **Regras:**
 - `main` é sempre implantável / estável.
 - **Nunca** faça force-push no `main`.
+- `dev` é um ambiente de integração / deve se manter estável.
 - Toda mudança deve ser feita em seu próprio branch e integrada via pull request.
 - Exclua seu branch após o merge do PR.
 
@@ -50,7 +61,7 @@ Os nomes de branches seguem o padrão `<type>/<short-description>`:
 **Regras:**
 - Use apenas **letras minúsculas** e **hífens** — sem espaços ou underscores.
 - Mantenha a descrição curta (2–4 palavras).
-- Crie branches a partir do `main` mais recente: `git checkout -b feat/my-feature origin/main`.
+- Crie branches a partir do `dev` mais recente: `git checkout -b feat/my-feature origin/dev`.
 
 ---
 
@@ -98,6 +109,8 @@ Refs #51
 docs(onboarding): add SSH setup instructions
 ```
 
+Obs.: "Closes #34" fecha a issue automaticamente quando o PR for mergeado, enquanto "Refs #51" apenas referencia a issue sem fechá-la.
+
 ---
 
 ## 4. Pull Requests
@@ -136,42 +149,21 @@ Use o [`templates/pull_request_template.md`](../templates/pull_request_template.
 ## 6. Convenções de Nomenclatura
 
 ### Arquivos e Diretórios
-- Use `snake_case` para arquivos Python e scripts: `sensor_parser.py`
+- Arquivos e Pastas: Use kebab-case para nomes de arquivos e diretórios. É o padrão absoluto no ecossistema Node.js (ex: auth-middleware.js, user-controller.ts).
 - Use `kebab-case` para arquivos Markdown e de configuração: `onboarding.md`, `docker-compose.yml`
 - Use `PascalCase` para arquivos de classe onde a convenção da linguagem exige (ex.: C++): `TelemetryFrame.hpp`
 
 ### Variáveis e Funções (Python)
-```python
-# Variáveis: snake_case
-packet_count = 0
-sensor_data = []
+```javascript
+// Constantes Globais/Configurações: UPPER_SNAKE_CASE
+const MAX_PACKET_SIZE = 1024;
+const DEFAULT_PORT = 3000;
 
-# Funções: snake_case, verbo primeiro
-def parse_gps_frame(raw_bytes):
-    ...
-
-# Classes: PascalCase
-class TelemetryParser:
-    ...
-
-# Constantes: UPPER_SNAKE_CASE
-MAX_PACKET_SIZE = 1024
-DEFAULT_BAUD_RATE = 115200
-```
-
-### Variáveis e Funções (C / C++)
-```cpp
-// Variáveis: camelCase ou snake_case (seja consistente por projeto)
-uint32_t packetCount = 0;
-
-// Funções: camelCase
-void parseTelemetryFrame(uint8_t* buffer, size_t len);
-
-// Classes / Structs: PascalCase
-class TelemetryParser { ... };
-
-// Constantes / Macros: UPPER_SNAKE_CASE
-#define MAX_PACKET_SIZE 1024
+// Enums (ou Objetos de configuração congelados): PascalCase nas chaves ou UPPER_SNAKE_CASE
+const Status = {
+    ACTIVE: 'active',
+    INACTIVE: 'inactive'
+};
 ```
 
 ### Branches e Tags
@@ -180,7 +172,41 @@ class TelemetryParser { ... };
 
 ---
 
-## 7. Princípios de Código Limpo
+## 7. Padrões de Documentação (JSDoc)
+
+* Toda função exportada, classe e middleware deve ter um bloco de comentário **JSDoc**.
+* Inicie o bloco sempre com `/**` (dois asteriscos) para que o editor de código reconheça como documentação oficial.
+* Mantenha a documentação sincronizada — atualize o JSDoc no mesmo PR da mudança lógica.
+* Use as tags `@param`, `@returns` e `@throws` para definir a estrutura da função.
+
+**Exemplo de documentação JSDoc (JavaScript):**
+
+```javascript
+/**
+ * Converte uma sentença NMEA 0183 bruta em um objeto estruturado.
+ * * @param {string} sentence - Sentença NMEA bruta, ex: "$GPGGA,123519,4807.038,N,...*47"
+ * @returns {Object} Objeto contendo as chaves: type, fields e checksumValid.
+ * * @throws {Error} Se a sentença não começar com o caractere '$'.
+ */
+function parseNmeaSentence(sentence) {
+  if (!sentence.startsWith('$')) {
+    throw new Error("Sentença NMEA inválida: deve começar com '$'");
+  }
+  // ... lógica de processamento
+}
+```
+
+Os parametros e o valor de retorno devem ser claramente descritos, incluindo seus tipos. Isso melhora a legibilidade e permite que ferramentas de análise estática forneçam melhores insights sobre o código.
+
+### Por que usar JSDoc em vez de comentários simples?
+
+1.  **Hover de Informação:** No VS Code, ao passar o mouse sobre `parseNmeaSentence` em qualquer outro arquivo, você verá exatamente o que ela espera e o que ela retorna.
+2.  **Facilita o TypeScript:** Se um dia você migrar o **PGI-PROA** para TypeScript, o compilador consegue aproveitar grande parte das informações do seu JSDoc.
+3.  **Geração Automática de Docs:** Ferramentas como o *Swagger* (para APIs) ou *JSDoc Generator* podem ler esses comentários e criar uma página web de documentação para a sua equipe automaticamente.
+
+---
+
+## 8. Princípios de Código Limpo
 
 1. **Legível em vez de inteligente** — o código é lido muito mais do que escrito.
 2. **Responsabilidade única** — cada função e classe faz uma coisa bem.
@@ -193,64 +219,53 @@ class TelemetryParser { ... };
 
 ### Exemplo: Antes vs. Depois
 
-```python
-# ❌ Difícil de entender
-def p(d, t):
-    return d * 1000 / t
+```javascript
+// ❌ Difícil de entender e manter
+function p(d, t) {
+  return d * 1000 / t;
+}
 
-# ✅ Claro e sustentável
-METERS_PER_KILOMETER = 1000
+// ✅ Claro, sustentável e com tipagem via JSDoc
+const METERS_PER_KILOMETER = 1000;
+const SECONDS_PER_HOUR = 3600;
 
-def calculate_speed_kph(distance_meters: float, time_seconds: float) -> float:
-    """Return speed in km/h given distance in metres and time in seconds."""
-    return (distance_meters / METERS_PER_KILOMETER) / (time_seconds / 3600)
+/**
+ * Calcula a velocidade em km/h.
+ * @param {number} distanceMeters - Distância percorrida em metros.
+ * @param {number} timeSeconds - Tempo gasto em segundos.
+ * @returns {number} Velocidade resultante em km/h.
+ */
+function calculateSpeedKph(distanceMeters, timeSeconds) {
+  const distanceKm = distanceMeters / METERS_PER_KILOMETER;
+  const timeHours = timeSeconds / SECONDS_PER_HOUR;
+  
+  return distanceKm / timeHours;
+}
 ```
 
 ---
 
-## 8. Estrutura do Projeto
+## 9. Estrutura do Projeto
 
 Todo repositório `dev.*` deve seguir este layout:
 
 ```
 dev.<projectName>/
-├── README.md           # Visão geral do projeto (use templates/project_template.md)
-├── CONTRIBUTING.md     # Como contribuir com este projeto específico
-├── src/                # Código-fonte
-│   ├── <module>/
-│   └── main.py / main.cpp
-├── tests/              # Testes unitários e de integração
-├── docs/               # Documentação específica do projeto
-├── scripts/            # Scripts de build, deploy e utilitários
+├── src/                # Código-fonte (Lógica de negócio)
+│   ├── app.js          # Ponto de entrada da aplicação (ou index.js)
+│   ├── controllers/    # Lógica de rotas e requisições
+│   ├── models/         # Definição de dados/esquemas
+│   ├── middlewares/    # Interceptadores (auth, logs, etc)
+│   └── utils/          # Funções utilitárias e helpers
+├── tests/              # Testes unitários (Jest/Vitest) e integração
+├── docs/               # Documentação específica (Diagramas, Swagger)
+├── scripts/            # Scripts de automação e migração de banco
 ├── .github/
-│   ├── workflows/      # Pipelines de CI/CD
-│   └── PULL_REQUEST_TEMPLATE.md
-└── .gitignore
+│   └── workflows/      # Pipelines de CI/CD (GitHub Actions)
+├── .gitignore          # Essencial: sempre incluir node_modules/ e .env
+├── package.json        # Manifesto do projeto e dependências
+├── package-lock.json   # Trava de versões das dependências
+└── README.md           # Visão geral (use templates/project_template.md)
 ```
 
 ---
-
-## 9. Padrões de Documentação
-
-- Toda função pública, classe e módulo deve ter uma docstring / comentário de documentação.
-- Mantenha a documentação próxima ao código — atualize os docs no mesmo PR que a mudança de código.
-- Use Markdown para toda documentação escrita.
-- Use tabelas, blocos de código e cabeçalhos para melhorar a legibilidade.
-
-**Exemplo de docstring Python:**
-```python
-def parse_nmea_sentence(sentence: str) -> dict:
-    """
-    Parse a raw NMEA 0183 sentence into a structured dictionary.
-
-    Args:
-        sentence: Raw NMEA string, e.g. "$GPGGA,123519,4807.038,N,...*47"
-
-    Returns:
-        Dictionary with keys: type, fields, checksum_valid
-
-    Raises:
-        ValueError: If the sentence does not start with '$'.
-    """
-    ...
-```

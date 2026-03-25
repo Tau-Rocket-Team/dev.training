@@ -34,33 +34,35 @@ fizzbuzz(20) → [
 
 ---
 
-## Requisitos
-
-1. Implemente `fizzbuzz(n: int) -> list[str]` em Python (ou na linguagem de sua escolha).
-2. A função deve tratar casos extremos:
-   - `n = 0` → retorne uma lista vazia.
-   - `n` negativo → lance um `ValueError` com uma mensagem descritiva.
-3. Escreva pelo menos **5 testes unitários** cobrindo diferentes cenários.
-4. Seu código deve estar devidamente formatado e com lint antes da submissão.
+## Pré-Requisitos
+1. Ter o Node.js instalado (versão 20 ou superior). Veja [aqui](https://github.com/Tau-Rocket-Team/dev.docs/blob/main/docs/backend/nodejs.md) para instruções de instalação.
+2. Ter o vitest instalado globalmente ou como dependência de desenvolvimento para rodar os testes. Veja [aqui](https://github.com/Tau-Rocket-Team/dev.docs/blob/main/docs/tests/vitest.md) para um guia completo sobre o Vitest.
+3. Conhecimento básico de JavaScript ou TypeScript, incluindo loops, condicionais e funções. Veja [aqui](https://github.com/Tau-Rocket-Team/dev.docs/blob/main/docs/web/javascript.md)
 
 ---
 
-## Bônus
+## Requisitos
 
-- Aceite um parâmetro opcional `rules` que é uma lista de tuplas `(divisor, label)`, tornando a função totalmente configurável. As regras padrão do FizzBuzz devem ser o padrão.
-
-```python
-# Exemplo de uso com regras customizadas
-fizzbuzz(15, rules=[(3, "Fizz"), (5, "Buzz"), (7, "Rocket")])
-```
+1. Implemente `fizzbuzz(n: int) -> list[str]` em JavaScript ou TypeScript.
+   * Assinatura (TS): `fizzBuzz(n: number): string[]`
+2. A função deve tratar casos extremos:
+   - `n = 0` → retorne uma lista vazia.
+   * `n` negativo → Lance um **`RangeError`** com uma mensagem descritiva (ex: "O valor de n deve ser positivo").
+3.  Escreva pelo menos **5 testes unitários** utilizando **Jest** ou **Vitest**, cobrindo:
+      * Entrada zero.
+      * Entrada negativa (validação de exceção).
+      * Múltiplos de 3 (Fizz).
+      * Múltiplos de 5 (Buzz).
+      * Múltiplos de ambos (FizzBuzz).
+4. Seu código deve estar devidamente formatado e com lint antes da submissão.
 
 ---
 
 ## Submissão
 
 1. Crie um branch: `feat/challenge-01-<your-github-username>`.
-2. Coloque sua solução em: `activities/submissions/<your-github-username>/challenge_01/solution.py`.
-3. Coloque seus testes em: `activities/submissions/<your-github-username>/challenge_01/test_solution.py`.
+2. Coloque sua solução em: `activities/submissions/<your-github-username>/challenge_01/solution.js`.
+3. Coloque seus testes em: `activities/submissions/<your-github-username>/challenge_01/test_solution.js`.
 4. Abra um pull request e solicite seu mentor como revisor.
 
 Veja [`activities/submissions/README.md`](../submissions/README.md) para instruções completas de submissão.

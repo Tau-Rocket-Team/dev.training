@@ -6,14 +6,16 @@
 
 ## Índice
 
-1. [Visão Geral](#1-visão-geral)
-2. [Pré-requisitos](#2-pré-requisitos)
-3. [Primeiros Passos](#3-primeiros-passos)
-4. [Estrutura do Projeto](#4-estrutura-do-projeto)
-5. [Uso](#5-uso)
-6. [Testes](#6-testes)
-7. [Contribuindo](#7-contribuindo)
-8. [Licença](#8-licença)
+- [dev.](#dev)
+  - [Índice](#índice)
+  - [1. Visão Geral](#1-visão-geral)
+  - [2. Pré-requisitos](#2-pré-requisitos)
+  - [3. Primeiros Passos](#3-primeiros-passos)
+  - [4. Estrutura do Projeto](#4-estrutura-do-projeto)
+  - [5. Uso](#5-uso)
+  - [6. Testes](#6-testes)
+  - [7. Contribuindo](#7-contribuindo)
+  - [8. Licença](#8-licença)
 
 ---
 
@@ -32,7 +34,7 @@
 
 | Requisito | Versão | Observações |
 |---|---|---|
-| Python | 3.11+ | Ou substitua pela sua linguagem |
+| Javascript | 24.14+ | Ou substitua pela sua linguagem |
 | Docker | 24.0+ | Opcional, para builds em contêiner |
 | <!-- ferramenta --> | <!-- versão --> | <!-- observações --> |
 
@@ -47,53 +49,52 @@ Veja [`dev.training/docs/tools.md`](https://github.com/Tau-Rocket-Team/dev.train
 git clone git@github.com:Tau-Rocket-Team/dev.<projectName>.git
 cd dev.<projectName>
 
-# 2. Crie e ative um ambiente virtual (projetos Python)
-python3 -m venv .venv
-source .venv/bin/activate
+# 2. Instale as dependências (gera a pasta node_modules)
+npm install
 
-# 3. Instale as dependências
-pip install -r requirements.txt
+# 3. Configure as variáveis de ambiente (se houver)
+cp .env.example .env
 
-# 4. Execute a aplicação
-python src/main.py
+# 4. Execute a aplicação (modo desenvolvimento)
+npm run dev
 ```
 
 ---
 
 ## 4. Estrutura do Projeto
 
-```
+```text
 dev.<projectName>/
 ├── README.md
 ├── CONTRIBUTING.md
 ├── src/
-│   ├── <module>/
-│   └── main.py
+│   ├── controllers/
+│   ├── services/
+│   └── app.js           # Ponto de entrada (substitui main.py)
 ├── tests/
-│   ├── unit/
-│   └── integration/
+│   ├── unit/
+│   └── integration/
 ├── docs/
 ├── scripts/
 ├── .github/
-│   └── workflows/
-│       ├── ci.yml
-│       └── release.yml
-└── .gitignore
+│   └── workflows/
+│       ├── ci.yml
+│       └── release.yml
+├── .gitignore           # Deve ignorar node_modules/ e .env
+└── package.json         # Manifesto e dependências (substitui requirements.txt)
 ```
 
 ---
 
 ## 5. Uso
 
-<!-- Forneça exemplos claros de uso com blocos de código -->
+```javascript
+// Exemplo de uso (ESModules)
+import { TelemetryParser } from './src/services/telemetry-parser.js';
 
-```python
-# Exemplo de uso
-from src.<module> import <Class>
-
-obj = <Class>()
-result = obj.do_something()
-print(result)
+const parser = new TelemetryParser();
+const result = parser.parseFrame(rawData);
+console.log(result);
 ```
 
 ---
@@ -101,14 +102,14 @@ print(result)
 ## 6. Testes
 
 ```bash
-# Executar todos os testes
-pytest
+# Executar todos os testes (Vitest)
+npm test
 
-# Executar com relatório de cobertura
-pytest --cov=src --cov-report=term-missing
+# Executar com relatório de cobertura (Coverage)
+npm run test:coverage
 
 # Executar apenas testes unitários
-pytest tests/unit/
+npx vitest tests/unit/
 ```
 
 Todos os testes devem passar antes de abrir um pull request. Veja a configuração de CI em `.github/workflows/ci.yml`.

@@ -11,18 +11,18 @@ Cada desenvolvedor tem seu próprio subdiretório nomeado após seu nome de usu�
 ```
 submissions/
 ├── README.md               ← Este arquivo
-├── jane-smith/
+├── fernando-dorneles/
 │   ├── challenge_01/
-│   │   ├── solution.py
-│   │   └── test_solution.py
+│   │   ├── solution.js
+│   │   └── test_solution.js
 │   └── int_challenge_01/
-│       ├── solution.py
-│       ├── test_solution.py
+│       ├── solution.js
+│       ├── test_solution.js
 │       └── README.md
 └── john-doe/
     └── challenge_01/
-        ├── solution.py
-        └── test_solution.py
+        ├── solution.js
+        └── test_solution.js
 ```
 
 ---
@@ -44,22 +44,27 @@ Coloque seus arquivos no subdiretório correto conforme especificado pelo desafi
 ```bash
 # Exemplo para o desafio 01
 mkdir -p activities/submissions/<your-github-username>/challenge_01
-# Adicione solution.py e test_solution.py
+# Adicione solution.js e test_solution.js
 ```
 
 ### Passo 3: Execute os Testes e o Lint Localmente
 
-Sempre verifique se seu trabalho passa antes de submeter:
+Sempre verifique se seu trabalho passa em todos os critérios antes de realizar o `push`:
 
 ```bash
 cd activities/submissions/<your-github-username>/challenge_01
 
-# Executar testes
-pytest test_solution.py -v
+# Instalar as dependências (caso seja a primeira vez)
+npm install
 
-# Lint
-ruff check solution.py
-ruff format --check solution.py
+# Executar os testes com Vitest
+npx vitest run
+
+# Verificar regras de código (Lint)
+npx eslint .
+
+# Verificar a formatação (Prettier)
+npx prettier --check .
 ```
 
 ### Passo 4: Abra um Pull Request
