@@ -1,6 +1,6 @@
 # dev.training
 
-> O hub central de integração, treinamento, padrões e acompanhamento de atividades para o time de desenvolvimento da Tau Rocket Team.
+> O hub central de integração, treinamento e acompanhamento de atividades para o time de desenvolvimento da Tau Rocket Team.
 
 ---
 

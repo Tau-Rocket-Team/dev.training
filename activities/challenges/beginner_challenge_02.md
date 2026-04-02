@@ -12,6 +12,13 @@ Conversões de temperatura são uma tarefa comum no mundo real. Foguetes lidam c
 
 ---
 
+## Pré-Requisitos
+1. Ter o Node.js instalado (versão 20 ou superior). Veja [aqui](https://github.com/Tau-Rocket-Team/dev.docs/blob/main/docs/backend/nodejs.md) para instruções de instalação.
+2. Ter o vitest instalado globalmente ou como dependência de desenvolvimento para rodar os testes. Veja [aqui](https://github.com/Tau-Rocket-Team/dev.docs/blob/main/docs/tests/vitest.md) para um guia completo sobre o Vitest.
+3. Conhecimento básico de JavaScript ou TypeScript, incluindo loops, condicionais e funções. Veja [aqui](https://github.com/Tau-Rocket-Team/dev.docs/blob/main/docs/web/javascript.md)
+
+---
+
 ## Enunciado do Problema
 
 Crie uma classe `TemperatureConverter` que possa converter entre **Celsius (C)**, **Fahrenheit (F)** e **Kelvin (K)**.
@@ -29,36 +36,34 @@ Crie uma classe `TemperatureConverter` que possa converter entre **Celsius (C)**
 
 ### Interface da Classe
 
-```python
-class TemperatureConverter:
-    def convert(self, value: float, from_unit: str, to_unit: str) -> float:
-        """
-        Convert a temperature value from one unit to another.
-
-        Args:
-            value: The temperature value to convert.
-            from_unit: Source unit — "C", "F", or "K".
-            to_unit: Target unit — "C", "F", or "K".
-
-        Returns:
-            Converted temperature rounded to 4 decimal places.
-
-        Raises:
-            ValueError: If either unit is not "C", "F", or "K".
-            ValueError: If the resulting temperature is below absolute zero.
-        """
+```javascript
+class TemperatureConverter {
+  /**
+   * Converte um valor de temperatura de uma unidade para outra.
+   *
+   * @param {number} value - O valor da temperatura a ser convertido.
+   * @param {string} fromUnit - Unidade de origem — "C", "F" ou "K".
+   * @param {string} toUnit - Unidade de destino — "C", "F" ou "K".
+   * @returns {number} Temperatura convertida arredondada para 4 casas decimais.
+   * @throws {Error} Se qualquer uma das unidades não for "C", "F" ou "K".
+   * @throws {Error} Se a temperatura resultante for inferior ao zero absoluto.
+   */
+  convert(value, fromUnit, toUnit) {
+    // A lógica de conversão será inserida aqui
+  }
+}
 ```
 
 ### Exemplo de Uso
 
-```python
-conv = TemperatureConverter()
+```javascript
+const conv = new TemperatureConverter();
 
-conv.convert(100, "C", "F")   # → 212.0
-conv.convert(32, "F", "C")    # → 0.0
-conv.convert(0, "C", "K")     # → 273.15
-conv.convert(0, "K", "C")     # → -273.15
-conv.convert(-300, "C", "K")  # → lança ValueError (abaixo do zero absoluto)
+conv.convert(100, "C", "F")   // → 212.0
+conv.convert(32, "F", "C")    // → 0.0
+conv.convert(0, "C", "K")     // → 273.15
+conv.convert(0, "K", "C")     // → -273.15
+conv.convert(-300, "C", "K")  // → lança RangeError (abaixo do zero absoluto)
 ```
 
 ---
@@ -66,16 +71,15 @@ conv.convert(-300, "C", "K")  # → lança ValueError (abaixo do zero absoluto)
 ## Requisitos
 
 1. Implemente a classe `TemperatureConverter`.
-2. Valide as entradas — lance `ValueError` com uma mensagem significativa para unidades inválidas ou temperaturas fisicamente impossíveis (abaixo de 0 K).
+2. Valide as entradas — lance `RangeError` com uma mensagem significativa para unidades inválidas ou temperaturas fisicamente impossíveis (abaixo de 0 K).
 3. Escreva pelo menos **8 testes unitários** incluindo casos extremos (zero absoluto, conversão para a mesma unidade, entrada inválida).
-4. **Não** use nenhuma biblioteca externa — apenas Python padrão.
+4. **Não** use nenhuma biblioteca externa — apenas JavaScript padrão.
 
 ---
 
 ## Bônus
 
 - Adicione um método `convert_batch(values, from_unit, to_unit)` que aceite uma lista e retorne uma lista de valores convertidos.
-- Adicione uma interface de linha de comando para que o script possa ser executado como: `python solution.py 100 C F`.
 
 ---
 

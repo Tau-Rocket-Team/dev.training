@@ -1,7 +1,7 @@
 # Desafio Iniciante 01 — FizzBuzz com um Toque
 
 **Dificuldade:** Iniciante  
-**Tempo estimado:** 20–30 minutos  
+**Tempo estimado:** 40–60 minutos  
 **Habilidades praticadas:** Loops, condicionais, funções, código limpo
 
 ---
